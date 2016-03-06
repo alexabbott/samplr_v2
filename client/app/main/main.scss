@@ -1,3 +1,9 @@
+body {
+  font-family: 'Work Sans', arial, sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
 .thing-form {
     margin: 20px 0;
 }
@@ -9,14 +15,14 @@
 
 #banner h1 {
     font-size: 60px;
-    line-height: 1;
     letter-spacing: -1px;
+    line-height: 1;
 }
 
 .hero-unit {
-    position: relative;
-    padding: 0px 15px;
     color: #000000;
+    padding: 0px 15px;
+    position: relative;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
@@ -28,17 +34,60 @@
     border-top: 1px solid #E5E5E5;
 }
 
+.nav {
+  text-align: center;
+}
+
 .navbar-text {
   margin-left: 15px;
 }
 
+.navbar-default {
+  background: #fff;
+  border: none;
+
+  .navbar-nav > .active > a {
+    background: none;
+  }
+}
+
 .nav-stacked {
-  margin-top: 20px;
+  padding-right: 0;
+  &:first {
+    margin-top: -20px;
+  }
   li {
-    overflow: hidden;
-    height: auto;
-    width: auto;
     border: 1px solid #000000;
     border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    height: 130px;
+    margin: 4px 15px;
+    overflow: hidden;
+    width: 140px;
+
+    .sample-name,
+    .sample-info {
+      text-align: center;
+    }
+  }
+  li:nth-of-type(1) {
+    margin-left: 0;
+  }
+}
+
+.sample-bank {
+  h3 {
+    text-align: center;
+  }
+}
+
+.kit-samples {
+  li:nth-of-type(1) {
+    margin-left: 15px;
+  }
+  .kit-name {
+    display: block;
+    text-align: center;
   }
 }

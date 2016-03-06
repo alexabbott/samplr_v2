@@ -24,6 +24,7 @@ $('.add-kit').click(function(){
   $('.sample-url').each(function(){
     sampleurls.push($(this).text());
   });
+
   $('.sample-1-name').attr('value', samplenames[0]).trigger('input');
   $('.sample-2-name').attr('value', samplenames[1]).trigger('input');
   $('.sample-3-name').attr('value', samplenames[2]).trigger('input');
@@ -75,6 +76,7 @@ $('.add-kit').click(function(){
   $('.sample-15-url').attr('value', sampleurls[14]).trigger('input');
   $('.sample-16-url').attr('value', sampleurls[15]).trigger('input');
 });
+
 
 var down = {};
 
@@ -289,10 +291,8 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 88 ) { //x
       function pause2(){
            var audio2 = $('.sample-player')[13];
-          if (down['88'] == null) {
             audio2.pause();
             down['88'] = null;
-          }
       };
       pause2();
   }
@@ -412,18 +412,28 @@ $(document).keyup(function(e) {
 </script>
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>SAMPLR</h1>
-    <p class="lead">The World's First Audio Sample Community</p>
-  </div>
-</header>
-
 <div class="container">
   <div class="row">
+
     <div class="col-lg-12">
-      <ul class="nav nav-tabs nav-stacked col-md-3 col-lg-3 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li class="sample">
+      <ul class="nav nav-tabs nav-stacked col-lg-8 col-lg-offset-2">
+        <li class="sample" ng-repeat="thing in awesomeThings | limitTo: 16">
+          <!-- <a href="#" tooltip="{{thing.info}}"> -->
+            <div class="sample-name">{{thing.name}}</div>
+            <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+          <!-- </a> -->
+          <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+          <br><span class="sample-url">{{thing.url}}</span>
+          <br><span class="sample-author">{{thing.author}}</span>
+          <br><audio class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}" controls>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-lg-12 sample-bank">
+      <h3>Sample Bank</h3>
+      <ul class="nav nav-tabs nav-stacked col-lg-12">
+        <li class="sample" ng-repeat="thing in awesomeThings">
           <a href="#" tooltip="{{thing.info}}"><span class="sample-name">{{thing.name}}</span><button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a>
           <span style="font-size: 8px;" class="sample-info">{{thing.info}}</span>
           <br><span class="sample-url">{{thing.url}}</span>
@@ -452,99 +462,99 @@ $(document).keyup(function(e) {
 
   <div class="row">
     <div class="col-lg-12">
-      <ul class="nav nav-tabs nav-stacked col-md-3 col-lg-3 col-sm-6 kit-samples" ng-repeat="kit in awesomeKits">
-        <li>
-          <a href="#">{{kit.name}}<button type="button" class="close" ng-click="deleteKit(kit)">&times;</button></a>
+      <ul class="nav nav-tabs nav-stacked col-lg-8 col-lg-offset-2 kit-samples" ng-repeat="kit in awesomeKits">
+        <a href="#" class="kit-name">{{kit.name}}<button type="button" class="close" ng-click="deleteKit(kit)">&times;</button></a>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample1name}}</span>
           <span style="font-size: 8px;">{{kit.sample1info}}</span>
           <span style="font-size: 8px;">{{kit.sample1url}}</span>
           <br><audio class="sample-1-player" src="{{trustSrc(kit.sample1url)}}" alt="{{kit.sample1url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample2name}}</span>
           <span style="font-size: 8px;">{{kit.sample2info}}</span>
           <span style="font-size: 8px;">{{kit.sample2url}}</span>
           <br><audio src="{{trustSrc(kit.sample2url)}}" alt="{{kit.sample2url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample3name}}</span>
           <span style="font-size: 8px;">{{kit.sample3info}}</span>
           <span style="font-size: 8px;">{{kit.sample3url}}</span>
           <br><audio src="{{trustSrc(kit.sample3url)}}" alt="{{kit.sample3url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample4name}}</span>
           <span style="font-size: 8px;">{{kit.sample4info}}</span>
           <span style="font-size: 8px;">{{kit.sample4url}}</span>
           <br><audio src="{{trustSrc(kit.sample4url)}}" alt="{{kit.sample4url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample5name}}</span>
           <span style="font-size: 8px;">{{kit.sample5info}}</span>
           <span style="font-size: 8px;">{{kit.sample5url}}</span>
           <br><audio src="{{trustSrc(kit.sample5url)}}" alt="{{kit.sample5url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample6name}}</span>
           <span style="font-size: 8px;">{{kit.sample6info}}</span>
           <span style="font-size: 8px;">{{kit.sample6url}}</span>
           <br><audio src="{{trustSrc(kit.sample6url)}}" alt="{{kit.sample6url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample7name}}</span>
           <span style="font-size: 8px;">{{kit.sample7info}}</span>
           <span style="font-size: 8px;">{{kit.sample7url}}</span>
           <br><audio src="{{trustSrc(kit.sample7url)}}" alt="{{kit.sample7url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample8name}}</span>
           <span style="font-size: 8px;">{{kit.sample8info}}</span>
           <span style="font-size: 8px;">{{kit.sample8url}}</span>
           <br><audio src="{{trustSrc(kit.sample8url)}}" alt="{{kit.sample8url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample9name}}</span>
           <span style="font-size: 8px;">{{kit.sample9info}}</span>
           <span style="font-size: 8px;">{{kit.sample9url}}</span>
           <br><audio src="{{trustSrc(kit.sample9url)}}" alt="{{kit.sample9url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample10name}}</span>
           <span style="font-size: 8px;">{{kit.sample10info}}</span>
           <span style="font-size: 8px;">{{kit.sample10url}}</span>
           <br><audio src="{{trustSrc(kit.sample10url)}}" alt="{{kit.sample10url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample11name}}</span>
           <span style="font-size: 8px;">{{kit.sample11info}}</span>
           <span style="font-size: 8px;">{{kit.sample11url}}</span>
           <br><audio src="{{trustSrc(kit.sample11url)}}" alt="{{kit.sample11url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample12name}}</span>
           <span style="font-size: 8px;">{{kit.sample12info}}</span>
           <span style="font-size: 8px;">{{kit.sample12url}}</span>
           <br><audio src="{{trustSrc(kit.sample12url)}}" alt="{{kit.sample12url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample13name}}</span>
           <span style="font-size: 8px;">{{kit.sample13info}}</span>
           <span style="font-size: 8px;">{{kit.sample13url}}</span>
           <br><audio src="{{trustSrc(kit.sample13url)}}" alt="{{kit.sample13url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample14name}}</span>
           <span style="font-size: 8px;">{{kit.sample14info}}</span>
           <span style="font-size: 8px;">{{kit.sample14url}}</span>
           <br><audio src="{{trustSrc(kit.sample14url)}}" alt="{{kit.sample14url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample15name}}</span>
           <span style="font-size: 8px;">{{kit.sample15info}}</span>
           <span style="font-size: 8px;">{{kit.sample15url}}</span>
           <br><audio src="{{trustSrc(kit.sample15url)}}" alt="{{kit.sample15url}}" controls>
         </li>
-        <li>
+        <li class="sample">
           <span style="font-size: 8px;">{{kit.sample16name}}</span>
           <span style="font-size: 8px;">{{kit.sample16info}}</span>
           <span style="font-size: 8px;">{{kit.sample16url}}</span>
