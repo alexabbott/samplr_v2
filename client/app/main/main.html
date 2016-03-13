@@ -19,20 +19,24 @@
       </ul>
     </div>
 
-
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveKitModal">
-      Save current kit
-    </button>
-    <br>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chooseKitModal">
-      Choose a kit
-    </button>
-    <button type="button" class="btn btn-primary btn-lg" id="btn-show-bank">
-      Show Sample Bank
-    </button>
-    <button type="button" class="btn btn-primary btn-lg hide" id="btn-hide-bank">
-      Hide Sample Bank
-    </button>
+    <div class="col-lg-8 col-lg-offset-2 save-kit-button-holder">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveKitModal">
+        Save current kit
+      </button>
+    </div>
+    <div class="col-lg-8 col-lg-offset-2 choose-kit-button-holder">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chooseKitModal">
+        Choose a kit
+      </button>
+    </div>
+    <div class="col-lg-8 col-lg-offset-2 bank-button-holder">
+      <button type="button" class="btn btn-primary btn-lg" id="btn-show-bank">
+        Show Sample Bank
+      </button>
+      <button type="button" class="btn btn-primary btn-lg hide" id="btn-hide-bank">
+        Hide Sample Bank
+      </button>
+    </div>
 
     <div class="col-lg-12 sample-bank">
       <input ng-model="query" class="sample-search" placeholder="Search for a sample">
@@ -289,11 +293,17 @@
 // button functions
 $('#btn-show-bank').on('click', function(){
   $(this).addClass('hide');
+  $(this).parent().removeClass('col-lg-8');
+  $(this).parent().removeClass('col-lg-offset-2');
+  $(this).parent().addClass('col-lg-12');
   $('#btn-hide-bank').removeClass('hide');
   $('.sample-bank').addClass('show-bank');
 });
 $('#btn-hide-bank').on('click', function(){
   $(this).addClass('hide');
+  $(this).parent().removeClass('col-lg-12');
+  $(this).parent().addClass('col-lg-8');
+  $(this).parent().addClass('col-lg-offset-2');
   $('#btn-show-bank').removeClass('hide');
   $('.sample-bank').removeClass('show-bank');
 });

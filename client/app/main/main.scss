@@ -147,6 +147,16 @@ body {
     display: block;
 }
 
+.save-kit-button-holder,
+.choose-kit-button-holder,
+.bank-button-holder {
+  padding: 0;
+}
+
+.bank-button-holder {
+  transition: width 0.5s;
+}
+
 .btn-primary {
   background: #D8D8D8;
   border: none;
