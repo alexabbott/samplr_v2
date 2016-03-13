@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 main-sample-holder">
       <ul class="nav nav-tabs nav-stacked col-lg-8 col-lg-offset-2">
         <li class="sample" ng-repeat="thing in awesomeThings | limitTo: 16">
           <!-- <a href="#" tooltip="{{thing.info}}"> -->
@@ -10,8 +10,8 @@
             <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
           <!-- </a> -->
           <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-          <br><span class="sample-url">{{thing.url}}</span>
-          <br><span class="sample-author">{{thing.author}}</span>
+<!--           <br><span class="sample-url">{{thing.url}}</span>
+ -->          <!-- <br><span class="sample-author">{{thing.author}}</span> -->
           <br><audio class="sample-player" crossorigin="anonymous" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
           <input type="range" class="filter filter-{{thing.name}}" min="0" max="5000" value="2500">
           <input type="range" class="gain gain-{{thing.name}}" min="0" max="2" value="1" step="0.1">
@@ -19,195 +19,265 @@
       </ul>
     </div>
 
+
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveKitModal">
+      Save current kit
+    </button>
+    <br>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chooseKitModal">
+      Choose a kit
+    </button>
+    <button type="button" class="btn btn-primary btn-lg" id="btn-show-bank">
+      Show Sample Bank
+    </button>
+    <button type="button" class="btn btn-primary btn-lg hide" id="btn-hide-bank">
+      Hide Sample Bank
+    </button>
+
     <div class="col-lg-12 sample-bank">
-      <h3>Sample Bank</h3>
+      <input ng-model="query" class="sample-search" placeholder="Search for a sample">
+      <button type="button" class="btn btn-primary btn-lg btn-add-sample" data-toggle="modal" data-target="#addSampleModal">
+      + Upload a New Sample
+      </button>
       <ul class="nav nav-tabs nav-stacked col-lg-12">
-        <li class="sample" ng-repeat="thing in awesomeThings">
-          <a href="#" tooltip="{{thing.info}}"><span class="sample-name">{{thing.name}}</span><button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a>
-          <span style="font-size: 8px;" class="sample-info">{{thing.info}}</span>
-          <br><span class="sample-url">{{thing.url}}</span>
-          <br><span class="sample-author">{{thing.author}}</span>
+        <li class="sample" ng-repeat="thing in awesomeThings | filter: query">
+          <!-- <a href="#" tooltip="{{thing.info}}"> -->
+          <div class="sample-name">{{thing.name}}</div>
+            <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a> -->
+          <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+<!--           <br><span class="sample-url">{{thing.url}}</span>
+ -->          <!-- <br><span class="sample-author">{{thing.author}}</span> -->
           <br><audio class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}" controls>
         </li>
       </ul>
     </div>
   </div>
 
-  <form class="thing-form">
-    <label>Add a new sample</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Sample Name" ng-model="newThing" onchange="addAuthor()">
-      <input type="text" class="form-control" placeholder="Sample Category" ng-model="newThingInfo">
-      <input type="text" class="form-control src" placeholder="Sample URL" ng-model="newThingUrl">
-      <input type="text" class="form-control author" placeholder="{{ getCurrentUser().name }}" ng-model="newThingAuthor" disabled><br>
-      <script type="text/javascript" src="//api.filepicker.io/v2/filepicker.js"></script>
-      <span class="input-group-btn">
-        <br>
-        <input type="filepicker" data-fp-apikey="AzyaNlSzTuqj0VxUNjFEAz" onchange="addURL(event.fpfile.url)">
-      </span>
-    </p>
-    <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New Sample</button>
-  </form>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <ul class="nav nav-tabs nav-stacked col-lg-8 col-lg-offset-2 kit-samples" ng-repeat="kit in awesomeKits">
-        <a href="#" class="kit-name">{{kit.name}}<button type="button" class="close" ng-click="deleteKit(kit)">&times;</button></a>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample1name}}</span>
-          <span style="font-size: 8px;">{{kit.sample1info}}</span>
-          <span style="font-size: 8px;">{{kit.sample1url}}</span>
-          <br><audio class="sample-1-player" src="{{trustSrc(kit.sample1url)}}" alt="{{kit.sample1url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample2name}}</span>
-          <span style="font-size: 8px;">{{kit.sample2info}}</span>
-          <span style="font-size: 8px;">{{kit.sample2url}}</span>
-          <br><audio src="{{trustSrc(kit.sample2url)}}" alt="{{kit.sample2url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample3name}}</span>
-          <span style="font-size: 8px;">{{kit.sample3info}}</span>
-          <span style="font-size: 8px;">{{kit.sample3url}}</span>
-          <br><audio src="{{trustSrc(kit.sample3url)}}" alt="{{kit.sample3url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample4name}}</span>
-          <span style="font-size: 8px;">{{kit.sample4info}}</span>
-          <span style="font-size: 8px;">{{kit.sample4url}}</span>
-          <br><audio src="{{trustSrc(kit.sample4url)}}" alt="{{kit.sample4url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample5name}}</span>
-          <span style="font-size: 8px;">{{kit.sample5info}}</span>
-          <span style="font-size: 8px;">{{kit.sample5url}}</span>
-          <br><audio src="{{trustSrc(kit.sample5url)}}" alt="{{kit.sample5url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample6name}}</span>
-          <span style="font-size: 8px;">{{kit.sample6info}}</span>
-          <span style="font-size: 8px;">{{kit.sample6url}}</span>
-          <br><audio src="{{trustSrc(kit.sample6url)}}" alt="{{kit.sample6url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample7name}}</span>
-          <span style="font-size: 8px;">{{kit.sample7info}}</span>
-          <span style="font-size: 8px;">{{kit.sample7url}}</span>
-          <br><audio src="{{trustSrc(kit.sample7url)}}" alt="{{kit.sample7url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample8name}}</span>
-          <span style="font-size: 8px;">{{kit.sample8info}}</span>
-          <span style="font-size: 8px;">{{kit.sample8url}}</span>
-          <br><audio src="{{trustSrc(kit.sample8url)}}" alt="{{kit.sample8url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample9name}}</span>
-          <span style="font-size: 8px;">{{kit.sample9info}}</span>
-          <span style="font-size: 8px;">{{kit.sample9url}}</span>
-          <br><audio src="{{trustSrc(kit.sample9url)}}" alt="{{kit.sample9url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample10name}}</span>
-          <span style="font-size: 8px;">{{kit.sample10info}}</span>
-          <span style="font-size: 8px;">{{kit.sample10url}}</span>
-          <br><audio src="{{trustSrc(kit.sample10url)}}" alt="{{kit.sample10url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample11name}}</span>
-          <span style="font-size: 8px;">{{kit.sample11info}}</span>
-          <span style="font-size: 8px;">{{kit.sample11url}}</span>
-          <br><audio src="{{trustSrc(kit.sample11url)}}" alt="{{kit.sample11url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample12name}}</span>
-          <span style="font-size: 8px;">{{kit.sample12info}}</span>
-          <span style="font-size: 8px;">{{kit.sample12url}}</span>
-          <br><audio src="{{trustSrc(kit.sample12url)}}" alt="{{kit.sample12url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample13name}}</span>
-          <span style="font-size: 8px;">{{kit.sample13info}}</span>
-          <span style="font-size: 8px;">{{kit.sample13url}}</span>
-          <br><audio src="{{trustSrc(kit.sample13url)}}" alt="{{kit.sample13url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample14name}}</span>
-          <span style="font-size: 8px;">{{kit.sample14info}}</span>
-          <span style="font-size: 8px;">{{kit.sample14url}}</span>
-          <br><audio src="{{trustSrc(kit.sample14url)}}" alt="{{kit.sample14url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample15name}}</span>
-          <span style="font-size: 8px;">{{kit.sample15info}}</span>
-          <span style="font-size: 8px;">{{kit.sample15url}}</span>
-          <br><audio src="{{trustSrc(kit.sample15url)}}" alt="{{kit.sample15url}}" controls>
-        </li>
-        <li class="sample">
-          <span style="font-size: 8px;">{{kit.sample16name}}</span>
-          <span style="font-size: 8px;">{{kit.sample16info}}</span>
-          <span style="font-size: 8px;">{{kit.sample16url}}</span>
-          <br><audio src="{{trustSrc(kit.sample16url)}}" alt="{{kit.sample16url}}" controls>
-        </li>
-      </ul>
+<!-- Modal -->
+<div class="modal fade" id="addSampleModal" tabindex="-1" role="dialog" aria-labelledby="addSampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addSampleLabel">Upload a new sample</h4>
+      </div>
+      <div class="modal-body">
+        <form class="thing-form">
+          <p class="input-group">
+            <input type="text" class="form-control" placeholder="Sample Name" ng-model="newThing" onchange="addAuthor()">
+            <!-- <input type="text" class="form-control" placeholder="Sample Category" ng-model="newThingInfo"> -->
+            <select class="form-control" ng-model="newThingInfo">
+                  <option value="" disabled selected>Choose a Category</option>
+                  <option value="Kick">Kick</option>
+                  <option value="Snare">Snare</option>
+                  <option value="Perc">Perc</option>
+                  <option value="FX">FX</option>
+                  <option value="Vocal">Vocal</option>
+                  <option value="Bass">Bass</option>
+                  <option value="Lead">Lead</option>
+            </select>
+            <input type="text" class="form-control src" placeholder="Sample URL" ng-model="newThingUrl">
+            <input type="text" class="form-control author" placeholder="{{ getCurrentUser().name }}" ng-model="newThingAuthor" disabled><br>
+            <script type="text/javascript" src="//api.filepicker.io/v2/filepicker.js"></script>
+            <span class="input-group-btn filepick">
+              <br>
+              <input type="filepicker" data-fp-apikey="AzyaNlSzTuqj0VxUNjFEAz" onchange="addURL(event.fpfile.url)">
+            </span>
+          </p>
+          <button type="submit" class="btn btn-primary btn-submit" ng-click="addThing()" data-dismiss="modal">Add New Sample</button>
+        </form>
+      </div>
     </div>
   </div>
+</div>
 
-  <form class="kit-form">
-    <label>Create a new kit</label>
-    <p class="input-group kit-inputs">
-      <input type="text" class="form-control" placeholder="Kit Name" ng-model="newKit">
-      <input type="text" class="form-control sample-1-name" placeholder="New Kit Sample 1 Name" ng-model="newKitSample1Name">
-      <input type="text" class="form-control sample-1-info" placeholder="New Kit Sample 1 Info" ng-model="newKitSample1Info">
-      <input type="text" class="form-control sample-1-url" placeholder="New Kit Sample 1 URL" ng-model="newKitSample1Url">
-      <input type="text" class="form-control sample-2-name" placeholder="New Kit Sample 2 Name" ng-model="newKitSample2Name">
-      <input type="text" class="form-control sample-2-info" placeholder="New Kit Sample 2 Info" ng-model="newKitSample2Info">
-      <input type="text" class="form-control sample-2-url" placeholder="New Kit Sample 2 URL" ng-model="newKitSample2Url">
-      <input type="text" class="form-control sample-3-name" placeholder="New Kit Sample 3 Name" ng-model="newKitSample3Name">
-      <input type="text" class="form-control sample-3-info" placeholder="New Kit Sample 3 Info" ng-model="newKitSample3Info">
-      <input type="text" class="form-control sample-3-url" placeholder="New Kit Sample 3 URL" ng-model="newKitSample3Url">
-      <input type="text" class="form-control sample-4-name" placeholder="New Kit Sample 4 Name" ng-model="newKitSample4Name">
-      <input type="text" class="form-control sample-4-info" placeholder="New Kit Sample 4 Info" ng-model="newKitSample4Info">
-      <input type="text" class="form-control sample-4-url" placeholder="New Kit Sample 4 URL" ng-model="newKitSample4Url">
-      <input type="text" class="form-control sample-5-name" placeholder="New Kit Sample 5 Name" ng-model="newKitSample5Name">
-      <input type="text" class="form-control sample-5-info" placeholder="New Kit Sample 5 Info" ng-model="newKitSample5Info">
-      <input type="text" class="form-control sample-5-url" placeholder="New Kit Sample 5 URL" ng-model="newKitSample5Url">
-      <input type="text" class="form-control sample-6-name" placeholder="New Kit Sample 6 Name" ng-model="newKitSample6Name">
-      <input type="text" class="form-control sample-6-info" placeholder="New Kit Sample 6 Info" ng-model="newKitSample6Info">
-      <input type="text" class="form-control sample-6-url" placeholder="New Kit Sample 6 URL" ng-model="newKitSample6Url">
-      <input type="text" class="form-control sample-7-name" placeholder="New Kit Sample 7 Name" ng-model="newKitSample7Name">
-      <input type="text" class="form-control sample-7-info" placeholder="New Kit Sample 7 Info" ng-model="newKitSample7Info">
-      <input type="text" class="form-control sample-7-url" placeholder="New Kit Sample 7 URL" ng-model="newKitSample7Url">
-      <input type="text" class="form-control sample-8-name" placeholder="New Kit Sample 8 Name" ng-model="newKitSample8Name">
-      <input type="text" class="form-control sample-8-info" placeholder="New Kit Sample 8 Info" ng-model="newKitSample8Info">
-      <input type="text" class="form-control sample-8-url" placeholder="New Kit Sample 8 URL" ng-model="newKitSample8Url">
-      <input type="text" class="form-control sample-9-name" placeholder="New Kit Sample 9 Name" ng-model="newKitSample9Name">
-      <input type="text" class="form-control sample-9-info" placeholder="New Kit Sample 9 Info" ng-model="newKitSample9Info">
-      <input type="text" class="form-control sample-9-url" placeholder="New Kit Sample 9 URL" ng-model="newKitSample9Url">
-      <input type="text" class="form-control sample-10-name" placeholder="New Kit Sample 10 Name" ng-model="newKitSample10Name">
-      <input type="text" class="form-control sample-10-info" placeholder="New Kit Sample 10 Info" ng-model="newKitSample10Info">
-      <input type="text" class="form-control sample-10-url" placeholder="New Kit Sample 10 URL" ng-model="newKitSample10Url">
-      <input type="text" class="form-control sample-11-name" placeholder="New Kit Sample 11 Name" ng-model="newKitSample11Name">
-      <input type="text" class="form-control sample-11-info" placeholder="New Kit Sample 11 Info" ng-model="newKitSample11Info">
-      <input type="text" class="form-control sample-11-url" placeholder="New Kit Sample 11 URL" ng-model="newKitSample11Url">
-      <input type="text" class="form-control sample-12-name" placeholder="New Kit Sample 12 Name" ng-model="newKitSample12Name">
-      <input type="text" class="form-control sample-12-info" placeholder="New Kit Sample 12 Info" ng-model="newKitSample12Info">
-      <input type="text" class="form-control sample-12-url" placeholder="New Kit Sample 12 URL" ng-model="newKitSample12Url">
-      <input type="text" class="form-control sample-13-name" placeholder="New Kit Sample 13 Name" ng-model="newKitSample13Name">
-      <input type="text" class="form-control sample-13-info" placeholder="New Kit Sample 13 Info" ng-model="newKitSample13Info">
-      <input type="text" class="form-control sample-13-url" placeholder="New Kit Sample 13 URL" ng-model="newKitSample13Url">
-      <input type="text" class="form-control sample-14-name" placeholder="New Kit Sample 14 Name" ng-model="newKitSample14Name">
-      <input type="text" class="form-control sample-14-info" placeholder="New Kit Sample 14 Info" ng-model="newKitSample14Info">
-      <input type="text" class="form-control sample-14-url" placeholder="New Kit Sample 14 URL" ng-model="newKitSample14Url">
-      <input type="text" class="form-control sample-15-name" placeholder="New Kit Sample 15 Name" ng-model="newKitSample15Name">
-      <input type="text" class="form-control sample-15-info" placeholder="New Kit Sample 15 Info" ng-model="newKitSample15Info">
-      <input type="text" class="form-control sample-15-url" placeholder="New Kit Sample 15 URL" ng-model="newKitSample15Url">
-      <input type="text" class="form-control sample-16-name" placeholder="New Kit Sample 16 Name" ng-model="newKitSample16Name">
-      <input type="text" class="form-control sample-16-info" placeholder="New Kit Sample 16 Info" ng-model="newKitSample16Info">
-      <input type="text" class="form-control sample-16-url" placeholder="New Kit Sample 16 URL" ng-model="newKitSample16Url">
-      <button type="submit" class="btn btn-primary add-kit" ng-click="addKit()">Add New Kit</button>
+
+  <!-- Modal -->
+<div class="modal fade" id="chooseKitModal" tabindex="-1" role="dialog" aria-labelledby="chooseKitLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="chooseKitLabel">Choose a Kit</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="nav nav-tabs nav-stacked col-lg-8 col-lg-offset-2 kit-samples" ng-repeat="kit in awesomeKits">
+              <a href="#" class="kit-name">{{kit.name}}<button type="button" class="close" ng-click="deleteKit(kit)">&times;</button></a>
+              <li class="sample">
+                <div>{{kit.sample1name}}</div>
+                <div style="font-size: 8px;">{{kit.sample1info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample1url}}</div> -->
+                <br><audio class="sample-1-player" src="{{trustSrc(kit.sample1url)}}" alt="{{kit.sample1url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample2name}}</div>
+                <div style="font-size: 8px;">{{kit.sample2info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample2url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample2url)}}" alt="{{kit.sample2url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample3name}}</div>
+                <div style="font-size: 8px;">{{kit.sample3info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample3url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample3url)}}" alt="{{kit.sample3url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample4name}}</div>
+                <div style="font-size: 8px;">{{kit.sample4info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample4url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample4url)}}" alt="{{kit.sample4url}}" controls>
+              </li>
+              <li class="sample">
+                <div >{{kit.sample5name}}</div>
+                <div style="font-size: 8px;">{{kit.sample5info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample5url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample5url)}}" alt="{{kit.sample5url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample6name}}</div>
+                <div style="font-size: 8px;">{{kit.sample6info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample6url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample6url)}}" alt="{{kit.sample6url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample7name}}</div>
+                <div style="font-size: 8px;">{{kit.sample7info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample7url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample7url)}}" alt="{{kit.sample7url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample8name}}</div>
+                <div style="font-size: 8px;">{{kit.sample8info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample8url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample8url)}}" alt="{{kit.sample8url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample9name}}</div>
+                <div style="font-size: 8px;">{{kit.sample9info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample9url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample9url)}}" alt="{{kit.sample9url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample10name}}</div>
+                <div style="font-size: 8px;">{{kit.sample10info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample10url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample10url)}}" alt="{{kit.sample10url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample11name}}</div>
+                <div style="font-size: 8px;">{{kit.sample11info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample11url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample11url)}}" alt="{{kit.sample11url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample12name}}</div>
+                <div style="font-size: 8px;">{{kit.sample12info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample12url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample12url)}}" alt="{{kit.sample12url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample13name}}</div>
+                <div style="font-size: 8px;">{{kit.sample13info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample13url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample13url)}}" alt="{{kit.sample13url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample14name}}</div>
+                <div style="font-size: 8px;">{{kit.sample14info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample14url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample14url)}}" alt="{{kit.sample14url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample15name}}</div>
+                <div style="font-size: 8px;">{{kit.sample15info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample15url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample15url)}}" alt="{{kit.sample15url}}" controls>
+              </li>
+              <li class="sample">
+                <div>{{kit.sample16name}}</div>
+                <div style="font-size: 8px;">{{kit.sample16info}}</div>
+                <!-- <div style="font-size: 8px;">{{kit.sample16url}}</div> -->
+                <br><audio src="{{trustSrc(kit.sample16url)}}" alt="{{kit.sample16url}}" controls>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal -->
+<div class="modal fade" id="saveKitModal" tabindex="-1" role="dialog" aria-labelledby="saveKitLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="saveKitLabel">Save Current Kit</h4>
+      </div>
+      <div class="modal-body">
+        <form class="kit-form">
+      <p class="input-group kit-inputs">
+        <input type="text" class="form-control" placeholder="Kit Name" ng-model="newKit">
+        <input type="text" class="form-control sample-1-name" placeholder="New Kit Sample 1 Name" ng-model="newKitSample1Name">
+        <input type="text" class="form-control sample-1-info" placeholder="New Kit Sample 1 Info" ng-model="newKitSample1Info">
+        <input type="text" class="form-control sample-1-url" placeholder="New Kit Sample 1 URL" ng-model="newKitSample1Url">
+        <input type="text" class="form-control sample-2-name" placeholder="New Kit Sample 2 Name" ng-model="newKitSample2Name">
+        <input type="text" class="form-control sample-2-info" placeholder="New Kit Sample 2 Info" ng-model="newKitSample2Info">
+        <input type="text" class="form-control sample-2-url" placeholder="New Kit Sample 2 URL" ng-model="newKitSample2Url">
+        <input type="text" class="form-control sample-3-name" placeholder="New Kit Sample 3 Name" ng-model="newKitSample3Name">
+        <input type="text" class="form-control sample-3-info" placeholder="New Kit Sample 3 Info" ng-model="newKitSample3Info">
+        <input type="text" class="form-control sample-3-url" placeholder="New Kit Sample 3 URL" ng-model="newKitSample3Url">
+        <input type="text" class="form-control sample-4-name" placeholder="New Kit Sample 4 Name" ng-model="newKitSample4Name">
+        <input type="text" class="form-control sample-4-info" placeholder="New Kit Sample 4 Info" ng-model="newKitSample4Info">
+        <input type="text" class="form-control sample-4-url" placeholder="New Kit Sample 4 URL" ng-model="newKitSample4Url">
+        <input type="text" class="form-control sample-5-name" placeholder="New Kit Sample 5 Name" ng-model="newKitSample5Name">
+        <input type="text" class="form-control sample-5-info" placeholder="New Kit Sample 5 Info" ng-model="newKitSample5Info">
+        <input type="text" class="form-control sample-5-url" placeholder="New Kit Sample 5 URL" ng-model="newKitSample5Url">
+        <input type="text" class="form-control sample-6-name" placeholder="New Kit Sample 6 Name" ng-model="newKitSample6Name">
+        <input type="text" class="form-control sample-6-info" placeholder="New Kit Sample 6 Info" ng-model="newKitSample6Info">
+        <input type="text" class="form-control sample-6-url" placeholder="New Kit Sample 6 URL" ng-model="newKitSample6Url">
+        <input type="text" class="form-control sample-7-name" placeholder="New Kit Sample 7 Name" ng-model="newKitSample7Name">
+        <input type="text" class="form-control sample-7-info" placeholder="New Kit Sample 7 Info" ng-model="newKitSample7Info">
+        <input type="text" class="form-control sample-7-url" placeholder="New Kit Sample 7 URL" ng-model="newKitSample7Url">
+        <input type="text" class="form-control sample-8-name" placeholder="New Kit Sample 8 Name" ng-model="newKitSample8Name">
+        <input type="text" class="form-control sample-8-info" placeholder="New Kit Sample 8 Info" ng-model="newKitSample8Info">
+        <input type="text" class="form-control sample-8-url" placeholder="New Kit Sample 8 URL" ng-model="newKitSample8Url">
+        <input type="text" class="form-control sample-9-name" placeholder="New Kit Sample 9 Name" ng-model="newKitSample9Name">
+        <input type="text" class="form-control sample-9-info" placeholder="New Kit Sample 9 Info" ng-model="newKitSample9Info">
+        <input type="text" class="form-control sample-9-url" placeholder="New Kit Sample 9 URL" ng-model="newKitSample9Url">
+        <input type="text" class="form-control sample-10-name" placeholder="New Kit Sample 10 Name" ng-model="newKitSample10Name">
+        <input type="text" class="form-control sample-10-info" placeholder="New Kit Sample 10 Info" ng-model="newKitSample10Info">
+        <input type="text" class="form-control sample-10-url" placeholder="New Kit Sample 10 URL" ng-model="newKitSample10Url">
+        <input type="text" class="form-control sample-11-name" placeholder="New Kit Sample 11 Name" ng-model="newKitSample11Name">
+        <input type="text" class="form-control sample-11-info" placeholder="New Kit Sample 11 Info" ng-model="newKitSample11Info">
+        <input type="text" class="form-control sample-11-url" placeholder="New Kit Sample 11 URL" ng-model="newKitSample11Url">
+        <input type="text" class="form-control sample-12-name" placeholder="New Kit Sample 12 Name" ng-model="newKitSample12Name">
+        <input type="text" class="form-control sample-12-info" placeholder="New Kit Sample 12 Info" ng-model="newKitSample12Info">
+        <input type="text" class="form-control sample-12-url" placeholder="New Kit Sample 12 URL" ng-model="newKitSample12Url">
+        <input type="text" class="form-control sample-13-name" placeholder="New Kit Sample 13 Name" ng-model="newKitSample13Name">
+        <input type="text" class="form-control sample-13-info" placeholder="New Kit Sample 13 Info" ng-model="newKitSample13Info">
+        <input type="text" class="form-control sample-13-url" placeholder="New Kit Sample 13 URL" ng-model="newKitSample13Url">
+        <input type="text" class="form-control sample-14-name" placeholder="New Kit Sample 14 Name" ng-model="newKitSample14Name">
+        <input type="text" class="form-control sample-14-info" placeholder="New Kit Sample 14 Info" ng-model="newKitSample14Info">
+        <input type="text" class="form-control sample-14-url" placeholder="New Kit Sample 14 URL" ng-model="newKitSample14Url">
+        <input type="text" class="form-control sample-15-name" placeholder="New Kit Sample 15 Name" ng-model="newKitSample15Name">
+        <input type="text" class="form-control sample-15-info" placeholder="New Kit Sample 15 Info" ng-model="newKitSample15Info">
+        <input type="text" class="form-control sample-15-url" placeholder="New Kit Sample 15 URL" ng-model="newKitSample15Url">
+        <input type="text" class="form-control sample-16-name" placeholder="New Kit Sample 16 Name" ng-model="newKitSample16Name">
+        <input type="text" class="form-control sample-16-info" placeholder="New Kit Sample 16 Info" ng-model="newKitSample16Info">
+        <input type="text" class="form-control sample-16-url" placeholder="New Kit Sample 16 URL" ng-model="newKitSample16Url">
+        <button type="submit" class="btn btn-primary add-kit btn-submit" ng-click="addKit()">Save Kit</button>
     </p>
   </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 <footer class="footer">
   <div class="container">
@@ -216,5 +286,15 @@
   </div>
 </footer>
 <script>
-
+// button functions
+$('#btn-show-bank').on('click', function(){
+  $(this).addClass('hide');
+  $('#btn-hide-bank').removeClass('hide');
+  $('.sample-bank').addClass('show-bank');
+});
+$('#btn-hide-bank').on('click', function(){
+  $(this).addClass('hide');
+  $('#btn-show-bank').removeClass('hide');
+  $('.sample-bank').removeClass('show-bank');
+});
 </script>
