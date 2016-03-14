@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('meanAppApp')
-  .controller('MainCtrl', function ($scope, $http, socket, $sce, $location, Auth) {
+  .controller('MainCtrl', function ($scope, $http, $window, socket, $sce, $location, Auth) {
     $scope.awesomeThings = [];
     $scope.awesomeKits = [];
 
@@ -23,7 +23,7 @@ angular.module('meanAppApp')
       if($scope.newThing === '') {
         return;
       }
-      $scope.newThingUrl = thisSound;
+      $scope.newThingUrl = fileURL;
       $scope.newThingAuthor = thisAuthor;
       $http.post('/api/things', { name: $scope.newThing, info: $scope.newThingInfo, url: $scope.newThingUrl, author: $scope.newThingAuthor });
       $scope.newThing = '';
@@ -100,6 +100,78 @@ angular.module('meanAppApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
       socket.unsyncUpdates('kit');
-    });
+    }),
 
+    $scope.creds = {
+      bucket: 'samplerv2',
+      access_key: 'AKIAIWRJUF6AZ35QMFBQ',
+      secret_key: '2OBf/105Umibm3Fi//chCLfJnEpdew6kxZFofLfW'
+    }
+
+  $scope.sizeLimit      = 10585760; // 10MB in Bytes
+  $scope.uploadProgress = 0;
+
+  $window.fileURL;
+  $scope.fileURL;
+  $scope.upload = function() {
+    AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
+    AWS.config.region = 'us-east-1';
+    var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
+
+    if($scope.file) {
+        // Perform File Size Check First
+        var fileSize = Math.round(parseInt($scope.file.size));
+        if (fileSize > $scope.sizeLimit) {
+          toastr.error('Sorry, your attachment is too big. <br/> Maximum '  + $scope.fileSizeLabel() + ' file attachment allowed','File Too Large');
+          return false;
+        }
+        // Prepend Unique String To Prevent Overwrites
+        var uniqueFileName = $scope.uniqueString() + '-' + $scope.file.name;
+
+        var params = { Key: uniqueFileName, ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
+
+        bucket.putObject(params, function(err, data) {
+          if(err) {
+            toastr.error(err.message,err.code);
+            return false;
+          }
+          else {
+            // Upload Successfully Finished
+            toastr.success('File Uploaded Successfully', 'Done');
+            $window.fileURL = 'https://samplerv2.s3.amazonaws.com/' + uniqueFileName;
+            console.log('https://samplerv2.s3.amazonaws.com/' + uniqueFileName);
+            $scope.fileURL = 'https://samplerv2.s3.amazonaws.com/' + uniqueFileName;
+
+            // Reset The Progress Bar
+            setTimeout(function() {
+              $scope.uploadProgress = 0;
+              $scope.$digest();
+            }, 4000);
+          }
+        })
+        .on('httpUploadProgress',function(progress) {
+          $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
+          $scope.$digest();
+        });
+      }
+      else {
+        // No File Selected
+        toastr.error('Please select a file to upload');
+      }
+    }
+
+    $scope.fileSizeLabel = function() {
+    // Convert Bytes To MB
+    return Math.round($scope.sizeLimit / 1024 / 1024) + 'MB';
+  };
+
+  $scope.uniqueString = function() {
+    var text     = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 8; i++ ) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
   });

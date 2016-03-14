@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('meanAppApp')
   .config(function ($stateProvider) {
     $stateProvider
@@ -10,9 +8,8 @@ angular.module('meanAppApp')
       });
   });
 
-var thisSound;
 function addURL(test){
-  thisSound = test;
+  fileURL = test;
   $('.src').attr('value',test);
 }
 
@@ -510,7 +507,7 @@ $('.filter').each(function() {
 for (var n=0;n<16;n++) {
   filterNodes[n].frequency.value = $(filters[n]).val();
   filterNodes[n].type = "bandpass";
-  filterNodes[n].Q.value = 0.2;
+  filterNodes[n].Q.value = 0.5;
 }
 
 $(filters[0]).on('input', function() {
@@ -657,3 +654,24 @@ $(gains[15]).on('input', function() {
   source[14].connect(filterNodes[14]).connect(gainNodes[14]).connect(audioCtx.destination);
   source[15].connect(filterNodes[15]).connect(gainNodes[15]).connect(audioCtx.destination);
 }, 1000);
+
+
+var directives = angular.module('directives', []);
+
+directives.directive('file', function() {
+  return {
+    restrict: 'AE',
+    scope: {
+      file: '@'
+    },
+    link: function(scope, el, attrs){
+      el.bind('change', function(event){
+        var files = event.target.files;
+        var file = files[0];
+        scope.file = file;
+        scope.$parent.file = file;
+        scope.$apply();
+      });
+    }
+  };
+});

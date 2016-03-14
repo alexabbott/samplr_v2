@@ -27,9 +27,6 @@ body {
     line-height: 1;
 }
 
-.nav-tabs {
-  border-bottom: none;
-}
 
 .hide {
   display: none;
@@ -52,6 +49,14 @@ body {
 
 .nav {
   text-align: center;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 
 .navbar-text {
