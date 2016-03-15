@@ -179,20 +179,23 @@ body {
     color: #fff;
 }
 
-.btn-add-sample {
-  float: left;
-  height: 40px;
-  line-height: 40px;
-  margin: 10px 0 0 0;
-  padding: 0;
-  width: 250px;
-}
+.sample-button-holder {
+  height: 57px;
+  .btn-add-sample {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    width: 250px;
+  }
 
-.sample-search {
-  float: left;
-  height: 40px;
-  margin: 10px 7px 0 0;
+  .sample-search {
+    float: left;
+    height: 40px;
+    margin: 10px 7px 0 0;
 
+  }
 }
 
 .kit-samples {

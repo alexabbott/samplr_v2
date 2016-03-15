@@ -19,73 +19,6 @@ function addAuthor(){
   $('.author').attr('value',thisAuthor);
 }
 
-$('.add-kit').click(function(){
-  var samplenames = [],
-      sampleinfos = [],
-      sampleurls = [];
-  $('.sample-name').each(function(){
-    samplenames.push($(this).text());
-  });
-  $('.sample-info').each(function(){
-    sampleinfos.push($(this).text());
-  });
-  $('.sample-url').each(function(){
-    sampleurls.push($(this).text());
-  });
-
-  $('.sample-1-name').attr('value', samplenames[0]).trigger('input');
-  $('.sample-2-name').attr('value', samplenames[1]).trigger('input');
-  $('.sample-3-name').attr('value', samplenames[2]).trigger('input');
-  $('.sample-4-name').attr('value', samplenames[3]).trigger('input');
-  $('.sample-5-name').attr('value', samplenames[4]).trigger('input');
-  $('.sample-6-name').attr('value', samplenames[5]).trigger('input');
-  $('.sample-7-name').attr('value', samplenames[6]).trigger('input');
-  $('.sample-8-name').attr('value', samplenames[7]).trigger('input');
-  $('.sample-9-name').attr('value', samplenames[8]).trigger('input');
-  $('.sample-10-name').attr('value', samplenames[9]).trigger('input');
-  $('.sample-11-name').attr('value', samplenames[10]).trigger('input');
-  $('.sample-12-name').attr('value', samplenames[11]).trigger('input');
-  $('.sample-13-name').attr('value', samplenames[12]).trigger('input');
-  $('.sample-14-name').attr('value', samplenames[13]).trigger('input');
-  $('.sample-15-name').attr('value', samplenames[14]).trigger('input');
-  $('.sample-16-name').attr('value', samplenames[15]).trigger('input');
-
-  $('.sample-1-info').attr('value', sampleinfos[0]).trigger('input');
-  $('.sample-2-info').attr('value', sampleinfos[1]).trigger('input');
-  $('.sample-3-info').attr('value', sampleinfos[2]).trigger('input');
-  $('.sample-4-info').attr('value', sampleinfos[3]).trigger('input');
-  $('.sample-5-info').attr('value', sampleinfos[4]).trigger('input');
-  $('.sample-6-info').attr('value', sampleinfos[5]).trigger('input');
-  $('.sample-7-info').attr('value', sampleinfos[6]).trigger('input');
-  $('.sample-8-info').attr('value', sampleinfos[7]).trigger('input');
-  $('.sample-9-info').attr('value', sampleinfos[8]).trigger('input');
-  $('.sample-10-info').attr('value', sampleinfos[9]).trigger('input');
-  $('.sample-11-info').attr('value', sampleinfos[10]).trigger('input');
-  $('.sample-12-info').attr('value', sampleinfos[11]).trigger('input');
-  $('.sample-13-info').attr('value', sampleinfos[12]).trigger('input');
-  $('.sample-14-info').attr('value', sampleinfos[13]).trigger('input');
-  $('.sample-15-info').attr('value', sampleinfos[14]).trigger('input');
-  $('.sample-16-info').attr('value', sampleinfos[15]).trigger('input');
-
-  $('.sample-1-url').attr('value', sampleurls[0]).trigger('input');
-  $('.sample-2-url').attr('value', sampleurls[1]).trigger('input');
-  $('.sample-3-url').attr('value', sampleurls[2]).trigger('input');
-  $('.sample-4-url').attr('value', sampleurls[3]).trigger('input');
-  $('.sample-5-url').attr('value', sampleurls[4]).trigger('input');
-  $('.sample-6-url').attr('value', sampleurls[5]).trigger('input');
-  $('.sample-7-url').attr('value', sampleurls[6]).trigger('input');
-  $('.sample-8-url').attr('value', sampleurls[7]).trigger('input');
-  $('.sample-9-url').attr('value', sampleurls[8]).trigger('input');
-  $('.sample-10-url').attr('value', sampleurls[9]).trigger('input');
-  $('.sample-11-url').attr('value', sampleurls[10]).trigger('input');
-  $('.sample-12-url').attr('value', sampleurls[11]).trigger('input');
-  $('.sample-13-url').attr('value', sampleurls[12]).trigger('input');
-  $('.sample-14-url').attr('value', sampleurls[13]).trigger('input');
-  $('.sample-15-url').attr('value', sampleurls[14]).trigger('input');
-  $('.sample-16-url').attr('value', sampleurls[15]).trigger('input');
-});
-
-
 var down = {};
 
 // grab keydown code + play sample
@@ -507,7 +440,7 @@ $('.filter').each(function() {
 for (var n=0;n<16;n++) {
   filterNodes[n].frequency.value = $(filters[n]).val();
   filterNodes[n].type = "bandpass";
-  filterNodes[n].Q.value = 0.5;
+  filterNodes[n].Q.value = 0;
 }
 
 $(filters[0]).on('input', function() {
