@@ -567,6 +567,61 @@ $(gains[15]).on('input', function() {
       gainNodes[15].gain.value = $(gains[15]).val();
 });
 
+
+var stretches = [];
+$('.stretch').each(function() {
+  stretches.push($(this));
+})
+
+$(stretches[0]).on('input', function() {
+      $('.sample-player')[0].playbackRate = $(stretches[0]).val();
+});
+$(stretches[1]).on('input', function() {
+      $('.sample-player')[1].playbackRate = $(stretches[1]).val();
+});
+$(stretches[2]).on('input', function() {
+      $('.sample-player')[2].playbackRate = $(stretches[2]).val();
+});
+$(stretches[3]).on('input', function() {
+      $('.sample-player')[3].playbackRate = $(stretches[3]).val();
+});
+$(stretches[4]).on('input', function() {
+      $('.sample-player')[4].playbackRate = $(stretches[4]).val();
+});
+$(stretches[5]).on('input', function() {
+      $('.sample-player')[5].playbackRate = $(stretches[5]).val();
+});
+$(stretches[6]).on('input', function() {
+      $('.sample-player')[6].playbackRate = $(stretches[6]).val();
+});
+$(stretches[7]).on('input', function() {
+      $('.sample-player')[7].playbackRate = $(stretches[7]).val();
+});
+$(stretches[8]).on('input', function() {
+      $('.sample-player')[8].playbackRate = $(stretches[8]).val();
+});
+$(stretches[9]).on('input', function() {
+      $('.sample-player')[9].playbackRate = $(stretches[9]).val();
+});
+$(stretches[10]).on('input', function() {
+      $('.sample-player')[10].playbackRate = $(stretches[10]).val();
+});
+$(stretches[11]).on('input', function() {
+      $('.sample-player')[11].playbackRate = $(stretches[11]).val();
+});
+$(stretches[12]).on('input', function() {
+      $('.sample-player')[12].playbackRate = $(stretches[12]).val();
+});
+$(stretches[13]).on('input', function() {
+      $('.sample-player')[13].playbackRate = $(stretches[13]).val();
+});
+$(stretches[14]).on('input', function() {
+      $('.sample-player')[14].playbackRate = $(stretches[14]).val();
+});
+$(stretches[15]).on('input', function() {
+      $('.sample-player')[15].playbackRate = $(stretches[15]).val();
+});
+
   // connect the AudioBufferSourceNode to the gainNode
   // and the gainNode to the destination, so we can play the
   // music and adjust the volume using the mouse cursor
