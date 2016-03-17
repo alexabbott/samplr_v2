@@ -27,7 +27,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 90 ) { //z
       function play1(){
            var audio1 = $('.sample-player')[12];
-          $(audio1).parent().addClass('selected');
+          $(audio1).parent().parent().addClass('selected');
            if (down['90'] == null) {
               audio1.pause();
               audio1.currentTime = 0;
@@ -40,7 +40,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 88 ) { //x
       function play2(){
            var audio2 = $('.sample-player')[13];
-           $(audio2).parent().addClass('selected');
+           $(audio2).parent().parent().addClass('selected');
           if (down['88'] == null) {
             audio2.pause();
             audio2.currentTime = 0;
@@ -53,7 +53,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 67 ) { //c
       function play3(){
            var audio3 = $('.sample-player')[14];
-           $(audio3).parent().addClass('selected');
+           $(audio3).parent().parent().addClass('selected');
            if (down['67'] == null) {
              audio3.pause();
              audio3.currentTime = 0;
@@ -66,7 +66,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 86 ) { //v
       function play4(){
            var audio4 = $('.sample-player')[15];
-           $(audio4).parent().addClass('selected');
+           $(audio4).parent().parent().addClass('selected');
            if (down['86'] == null) {
              audio4.pause();
              audio4.currentTime = 0;
@@ -79,7 +79,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 83 ) { //s
       function play5(){
            var audio5 = $('.sample-player')[8];
-           $(audio5).parent().addClass('selected');
+           $(audio5).parent().parent().addClass('selected');
            if (down['83'] == null) {
              audio5.pause();
              audio5.currentTime = 0;
@@ -92,7 +92,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 68 ) { //d
       function play6(){
            var audio6 = $('.sample-player')[9];
-           $(audio6).parent().addClass('selected');
+           $(audio6).parent().parent().addClass('selected');
            if (down['68'] == null) {
              audio6.pause();
              audio6.currentTime = 0;
@@ -105,7 +105,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 70 ) { //f
       function play7(){
            var audio7 = $('.sample-player')[10];
-           $(audio7).parent().addClass('selected');
+           $(audio7).parent().parent().addClass('selected');
            if (down['70'] == null) {
              audio7.pause();
              audio7.currentTime = 0;
@@ -118,7 +118,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 71 ) { //g
       function play8(){
            var audio8 = $('.sample-player')[11];
-           $(audio8).parent().addClass('selected');
+           $(audio8).parent().parent().addClass('selected');
            if (down['71'] == null) {
              audio8.pause();
              audio8.currentTime = 0;
@@ -131,7 +131,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 69 ) { //e
       function play9(){
            var audio9 = $('.sample-player')[4];
-           $(audio9).parent().addClass('selected');
+           $(audio9).parent().parent().addClass('selected');
            if (down['69'] == null) {
              audio9.pause();
              audio9.currentTime = 0;
@@ -144,7 +144,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 82 ) { //r
       function play10(){
            var audio10 = $('.sample-player')[5];
-           $(audio10).parent().addClass('selected');
+           $(audio10).parent().parent().addClass('selected');
            if (down['82'] == null) {
              audio10.pause();
              audio10.currentTime = 0;
@@ -157,7 +157,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 84 ) { //t
       function play11(){
            var audio11 = $('.sample-player')[6];
-           $(audio11).parent().addClass('selected');
+           $(audio11).parent().parent().addClass('selected');
            if (down['84'] == null) {
              audio11.pause();
              audio11.currentTime = 0;
@@ -170,7 +170,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 89 ) { //y
       function play12(){
            var audio12 = $('.sample-player')[7];
-           $(audio12).parent().addClass('selected');
+           $(audio12).parent().parent().addClass('selected');
            if (down['89'] == null) {
              audio12.pause();
              audio12.currentTime = 0;
@@ -183,7 +183,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 52 ) { //4
       function play13(){
            var audio13 = $('.sample-player')[0];
-           $(audio13).parent().addClass('selected');
+           $(audio13).parent().parent().addClass('selected');
            if (down['52'] == null) {
              audio13.pause();
              audio13.currentTime = 0;
@@ -196,7 +196,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 53 ) { //5
       function play14(){
            var audio14 = $('.sample-player')[1];
-           $(audio14).parent().addClass('selected');
+           $(audio14).parent().parent().addClass('selected');
            if (down['53'] == null) {
              audio14.pause();
              audio14.currentTime = 0;
@@ -209,7 +209,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 54 ) { //6
       function play15(){
            var audio15 = $('.sample-player')[2];
-           $(audio15).parent().addClass('selected');
+           $(audio15).parent().parent().addClass('selected');
            if (down['54'] == null) {
              audio15.pause();
              audio15.currentTime = 0;
@@ -222,7 +222,7 @@ $(document).keydown(function(e) {
   if ( e.keyCode === 55 ) { //7
       function play16(){
            var audio16 = $('.sample-player')[3];
-           $(audio16).parent().addClass('selected');
+           $(audio16).parent().parent().addClass('selected');
            if (down['55'] == null) {
              audio16.pause();
              audio16.currentTime = 0;
@@ -240,7 +240,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 90 ) { //z
       function pause1(){
            var audio1 = $('.sample-player')[12];
-           $(audio1).parent().removeClass('selected');
+           $(audio1).parent().parent().removeClass('selected');
             audio1.pause();
             down['90'] = null;
       };
@@ -249,7 +249,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 88 ) { //x
       function pause2(){
            var audio2 = $('.sample-player')[13];
-           $(audio2).parent().removeClass('selected');
+           $(audio2).parent().parent().removeClass('selected');
             audio2.pause();
             down['88'] = null;
       };
@@ -258,7 +258,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 67 ) { //c
       function pause3(){
            var audio3 = $('.sample-player')[14];
-           $(audio3).parent().removeClass('selected');
+           $(audio3).parent().parent().removeClass('selected');
            audio3.pause();
            down['67'] = null;
       };
@@ -267,7 +267,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 86 ) { //v
       function pause4(){
            var audio4 = $('.sample-player')[15];
-           $(audio4).parent().removeClass('selected');
+           $(audio4).parent().parent().removeClass('selected');
            audio4.pause();
            down['86'] = null;
       };
@@ -276,7 +276,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 83 ) { //s
       function pause5(){
            var audio5 = $('.sample-player')[8];
-           $(audio5).parent().removeClass('selected');
+           $(audio5).parent().parent().removeClass('selected');
            audio5.pause();
            down['83'] = null;
       };
@@ -285,7 +285,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 68 ) { //d
       function pause6(){
            var audio6 = $('.sample-player')[9];
-           $(audio6).parent().removeClass('selected');
+           $(audio6).parent().parent().removeClass('selected');
            audio6.pause();
            down['68'] = null;
       };
@@ -294,7 +294,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 70 ) { //f
       function pause7(){
            var audio7 = $('.sample-player')[10];
-           $(audio7).parent().removeClass('selected');
+           $(audio7).parent().parent().removeClass('selected');
            audio7.pause();
            down['70'] = null;
       };
@@ -303,7 +303,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 71 ) { //g
       function pause8(){
            var audio8 = $('.sample-player')[11];
-           $(audio8).parent().removeClass('selected');
+           $(audio8).parent().parent().removeClass('selected');
            audio8.pause();
            down['71'] = null;
       };
@@ -312,7 +312,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 69 ) { //e
       function pause9(){
            var audio9 = $('.sample-player')[4];
-           $(audio9).parent().removeClass('selected');
+           $(audio9).parent().parent().removeClass('selected');
            audio9.pause();
            down['69'] = null;
       };
@@ -321,7 +321,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 82 ) { //r
       function pause10(){
            var audio10 = $('.sample-player')[5];
-           $(audio10).parent().removeClass('selected');
+           $(audio10).parent().parent().removeClass('selected');
            audio10.pause();
            down['82'] = null;
       };
@@ -330,7 +330,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 84 ) { //t
       function pause11(){
            var audio11 = $('.sample-player')[6];
-           $(audio11).parent().removeClass('selected');
+           $(audio11).parent().parent().removeClass('selected');
            audio11.pause();
            down['84'] = null;
       };
@@ -339,7 +339,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 89 ) { //y
       function pause12(){
            var audio12 = $('.sample-player')[7];
-           $(audio12).parent().removeClass('selected');
+           $(audio12).parent().parent().removeClass('selected');
            audio12.pause();
            down['89'] = null;
       };
@@ -348,7 +348,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 52 ) { //4
       function pause13(){
            var audio13 = $('.sample-player')[0];
-           $(audio13).parent().removeClass('selected');
+           $(audio13).parent().parent().removeClass('selected');
            audio13.pause();
            down['52'] = null;
       };
@@ -357,7 +357,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 53 ) { //5
       function pause14(){
            var audio14 = $('.sample-player')[1];
-           $(audio14).parent().removeClass('selected');
+           $(audio14).parent().parent().removeClass('selected');
            audio14.pause();
            down['53'] = null;
       };
@@ -366,7 +366,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 54 ) { //6
       function pause15(){
            var audio15 = $('.sample-player')[2];
-           $(audio15).parent().removeClass('selected');
+           $(audio15).parent().parent().removeClass('selected');
            audio15.pause();
            down['54'] = null;
       };
@@ -375,7 +375,7 @@ $(document).keyup(function(e) {
   if ( e.keyCode === 55 ) { //7
       function pause16(){
            var audio16 = $('.sample-player')[3];
-           $(audio16).parent().removeClass('selected');
+           $(audio16).parent().parent().removeClass('selected');
            audio16.pause();
            down['55'] = null;
       };
@@ -393,7 +393,9 @@ setTimeout(function () {
   // Create a MediaElementAudioSourceNode
   // Feed the HTMLMediaElement into it
 
-  var source = [
+var source = [];
+function setSources() {
+  source = [
     audioCtx.createMediaElementSource(myAudio[0]),
     audioCtx.createMediaElementSource(myAudio[1]),
     audioCtx.createMediaElementSource(myAudio[2]),
@@ -411,8 +413,12 @@ setTimeout(function () {
     audioCtx.createMediaElementSource(myAudio[14]),
     audioCtx.createMediaElementSource(myAudio[15])
   ];
+}
+setSources();
 
-  var filterNodes = [
+var filterNodes = [];
+function setFilterNodes() {
+  filterNodes = [
       audioCtx.createBiquadFilter(),
       audioCtx.createBiquadFilter(),
       audioCtx.createBiquadFilter(),
@@ -430,7 +436,9 @@ setTimeout(function () {
       audioCtx.createBiquadFilter(),
       audioCtx.createBiquadFilter()
   ];
+}
 
+setFilterNodes();
 
 var filters = [];
 $('.filter').each(function() {
@@ -493,85 +501,68 @@ $(filters[15]).on('input', function() {
       filterNodes[15].frequency.value = $(filters[15]).val();
 });
 
-  // Create a gain node
-var gainNodes = [
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain(),
-      audioCtx.createGain()
-  ];
 
+// Set volume
 var gains = [];
 $('.gain').each(function() {
   gains.push($(this));
-})
+});
 
 $(gains[0]).on('input', function() {
-      gainNodes[0].gain.value = $(gains[0]).val();
+      $('.sample-player')[0].volume = $(gains[0]).val();
 });
 $(gains[1]).on('input', function() {
-      gainNodes[1].gain.value = $(gains[1]).val();
+      $('.sample-player')[1].volume = $(gains[1]).val();
 });
 $(gains[2]).on('input', function() {
-      gainNodes[2].gain.value = $(gains[2]).val();
+      $('.sample-player')[2].volume = $(gains[2]).val();
 });
 $(gains[3]).on('input', function() {
-      gainNodes[3].gain.value = $(gains[3]).val();
+      $('.sample-player')[3].volume = $(gains[3]).val();
 });
 $(gains[4]).on('input', function() {
-      gainNodes[4].gain.value = $(gains[4]).val();
+      $('.sample-player')[4].volume = $(gains[4]).val();
 });
 $(gains[5]).on('input', function() {
-      gainNodes[5].gain.value = $(gains[5]).val();
+      $('.sample-player')[5].volume = $(gains[5]).val();
 });
 $(gains[6]).on('input', function() {
-      gainNodes[6].gain.value = $(gains[6]).val();
+      $('.sample-player')[6].volume = $(gains[6]).val();
 });
 $(gains[7]).on('input', function() {
-      gainNodes[7].gain.value = $(gains[7]).val();
+      $('.sample-player')[7].volume = $(gains[7]).val();
 });
 $(gains[8]).on('input', function() {
-      gainNodes[8].gain.value = $(gains[8]).val();
+      $('.sample-player')[8].volume = $(gains[8]).val();
 });
 $(gains[9]).on('input', function() {
-      gainNodes[9].gain.value = $(gains[9]).val();
+      $('.sample-player')[9].volume = $(gains[9]).val();
 });
 $(gains[10]).on('input', function() {
-      gainNodes[10].gain.value = $(gains[10]).val();
+      $('.sample-player')[10].volume = $(gains[10]).val();
 });
 $(gains[11]).on('input', function() {
-      gainNodes[11].gain.value = $(gains[11]).val();
+      $('.sample-player')[11].volume = $(gains[11]).val();
 });
 $(gains[12]).on('input', function() {
-      gainNodes[12].gain.value = $(gains[12]).val();
+      $('.sample-player')[12].volume = $(gains[12]).val();
 });
 $(gains[13]).on('input', function() {
-      gainNodes[13].gain.value = $(gains[13]).val();
+      $('.sample-player')[13].volume = $(gains[13]).val();
 });
 $(gains[14]).on('input', function() {
-      gainNodes[14].gain.value = $(gains[14]).val();
+      $('.sample-player')[14].volume = $(gains[14]).val();
 });
 $(gains[15]).on('input', function() {
-      gainNodes[15].gain.value = $(gains[15]).val();
+      $('.sample-player')[15].volume = $(gains[15]).val();
 });
 
 
+// set playback rate
 var stretches = [];
 $('.stretch').each(function() {
   stretches.push($(this));
-})
+});
 
 $(stretches[0]).on('input', function() {
       $('.sample-player')[0].playbackRate = $(stretches[0]).val();
@@ -625,22 +616,22 @@ $(stretches[15]).on('input', function() {
   // connect the AudioBufferSourceNode to the gainNode
   // and the gainNode to the destination, so we can play the
   // music and adjust the volume using the mouse cursor
-  source[0].connect(filterNodes[0]).connect(gainNodes[0]).connect(audioCtx.destination);
-  source[1].connect(filterNodes[1]).connect(gainNodes[1]).connect(audioCtx.destination);
-  source[2].connect(filterNodes[2]).connect(gainNodes[2]).connect(audioCtx.destination);
-  source[3].connect(filterNodes[3]).connect(gainNodes[3]).connect(audioCtx.destination);
-  source[4].connect(filterNodes[4]).connect(gainNodes[4]).connect(audioCtx.destination);
-  source[5].connect(filterNodes[5]).connect(gainNodes[5]).connect(audioCtx.destination);
-  source[6].connect(filterNodes[6]).connect(gainNodes[6]).connect(audioCtx.destination);
-  source[7].connect(filterNodes[7]).connect(gainNodes[7]).connect(audioCtx.destination);
-  source[8].connect(filterNodes[8]).connect(gainNodes[8]).connect(audioCtx.destination);
-  source[9].connect(filterNodes[9]).connect(gainNodes[9]).connect(audioCtx.destination);
-  source[10].connect(filterNodes[10]).connect(gainNodes[10]).connect(audioCtx.destination);
-  source[11].connect(filterNodes[11]).connect(gainNodes[11]).connect(audioCtx.destination);
-  source[12].connect(filterNodes[12]).connect(gainNodes[12]).connect(audioCtx.destination);
-  source[13].connect(filterNodes[13]).connect(gainNodes[13]).connect(audioCtx.destination);
-  source[14].connect(filterNodes[14]).connect(gainNodes[14]).connect(audioCtx.destination);
-  source[15].connect(filterNodes[15]).connect(gainNodes[15]).connect(audioCtx.destination);
+  source[0].connect(filterNodes[0]).connect(audioCtx.destination);
+  source[1].connect(filterNodes[1]).connect(audioCtx.destination);
+  source[2].connect(filterNodes[2]).connect(audioCtx.destination);
+  source[3].connect(filterNodes[3]).connect(audioCtx.destination);
+  source[4].connect(filterNodes[4]).connect(audioCtx.destination);
+  source[5].connect(filterNodes[5]).connect(audioCtx.destination);
+  source[6].connect(filterNodes[6]).connect(audioCtx.destination);
+  source[7].connect(filterNodes[7]).connect(audioCtx.destination);
+  source[8].connect(filterNodes[8]).connect(audioCtx.destination);
+  source[9].connect(filterNodes[9]).connect(audioCtx.destination);
+  source[10].connect(filterNodes[10]).connect(audioCtx.destination);
+  source[11].connect(filterNodes[11]).connect(audioCtx.destination);
+  source[12].connect(filterNodes[12]).connect(audioCtx.destination);
+  source[13].connect(filterNodes[13]).connect(audioCtx.destination);
+  source[14].connect(filterNodes[14]).connect(audioCtx.destination);
+  source[15].connect(filterNodes[15]).connect(audioCtx.destination);
 }, 1000);
 
 
