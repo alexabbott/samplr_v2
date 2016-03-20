@@ -261,3 +261,17 @@ body {
     visibility: hidden;
   }
 }
+
+// record controls
+.record {
+  cursor: pointer;
+  position: absolute;
+  top: 15%;
+  left: 2%;
+}
+.stop {
+  cursor: pointer;
+  position: absolute;
+  top: 24%;
+  left: 2%;
+}
