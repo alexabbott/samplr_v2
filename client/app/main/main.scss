@@ -8,25 +8,10 @@ body {
   text-align: center;
 }
 
-.main-sample-holder {
-  padding: 0;
-}
 
 .thing-form {
     margin: 20px 0;
 }
-
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
-}
-
-#banner h1 {
-    font-size: 60px;
-    letter-spacing: -1px;
-    line-height: 1;
-}
-
 
 .hide {
   display: none;
@@ -47,6 +32,8 @@ body {
     border-top: 1px solid #E5E5E5;
 }
 
+
+// nav
 .nav {
   text-align: center;
 }
@@ -78,13 +65,18 @@ body {
   }
 }
 
+
+// main sampler
+.main-sample-holder {
+  padding: 0;
+}
 .nav-stacked {
   padding-right: 0;
   &:first {
     margin-top: -20px;
   }
   li {
-    background: #D8D8D8;
+    background: #E5E5E5;
     border-radius: 2px;
     color: #000000;
     cursor: pointer;
@@ -117,40 +109,44 @@ body {
   }
 }
 
+
+// sample bank
 .sample-bank {
+  background: transparent;
   height: 0px;
   overflow: hidden;
   padding: 0;
   transition: height 0.5s;
 
   &.show-bank {
+    background: #D8D8D8;
     height: 500px;
     overflow: auto;
-    transition: height 0.5s;
+    transition: height 0.5s ease-out, background 0.5s ease-out;
   }
   h3 {
     text-align: center;
   }
   li {
     width: 11.1%;
-    margin: 4px auto;
+    margin: 4px 6px !important;
   }
 }
 
-.filepick,
-.fp__btn {
-  display: block !important;
+
+// buttons
+.btn-close-bank {
+  float: right;
+  font-size: 30px;
+  margin-top: -10px;
 }
 
-.fp__overlay {
-  z-index: 1051 !important;
+.btn-choose-kit-close {
+  float: right;
+  font-size: 30px;
+  margin-top: -10px;
 }
 
-.btn-submit {
-    margin-right: 0;
-    margin-left: auto;
-    display: block;
-}
 
 .save-kit-button-holder,
 .choose-kit-button-holder,
@@ -159,7 +155,7 @@ body {
 }
 
 .bank-button-holder {
-  transition: width 0.5s;
+  transition: width 0.5s ease-out;
 }
 
 .btn-primary {
@@ -179,31 +175,89 @@ body {
     color: #fff;
 }
 
-.sample-button-holder {
+.sample-upload-button {
+  width: 250px;
+  margin-bottom: 30px;
+}
+
+.btn-submit {
+    display: block;
+    font-size: 20px;
+    height: 50px;
+    margin: 30px auto;
+    width: 90%;
+}
+
+.sample-bank-buttons {
   height: 57px;
+  padding: 0 24px;
   .btn-add-sample {
-    float: left;
+    background: #AEAEAE;
+    float: right;
     height: 40px;
     line-height: 40px;
     margin: 10px 0 0 0;
     padding: 0;
     width: 250px;
   }
-
   .sample-search {
     float: left;
     height: 40px;
     margin: 10px 7px 0 0;
-
+    width: 250px;
   }
 }
 
+// save kit
+.save-kit-input {
+  height: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.kit-name-input {
+  margin: 0 0 0 5%;
+  position: absolute !important;
+  top: 20px;
+  width: 90% !important;
+}
+
+
+// choose a kit
+.kit-options {
+  background: transparent;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease-out, background 0.5s ease-out;
+  .kit-options-holder {
+    margin-top: 30px;
+  }
+}
+
+.kit-options-open {
+  background: #D8D8D8;
+  height: 500px;
+}
+
 .kit-samples {
+  display: inline-block;
+  width: 220px;
   li:nth-of-type(1) {
     margin-left: 15px;
   }
   .kit-name {
-    display: block;
+    background: #E5E5E5;
+    color: #000;
+    display: inline-block;
+    height: 75px;
+    line-height: 75px;
+    margin: 0 8px;
     text-align: center;
+    text-decoration: none;
+    width: 200px;
+  }
+  .sample {
+    height: 0;
+    visibility: hidden;
   }
 }
