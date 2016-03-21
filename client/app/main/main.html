@@ -16,6 +16,7 @@
           <input type="range" class="filter filter-{{thing.name}}" min="0" max="5000" value="2500">
           <input type="range" class="gain gain-{{thing.name}}" min="0" max="1" value="1" step="0.1">
           <input type="range" class="stretch stretch-{{thing.name}}" min="0.5" max="2" value="1" step="0.1">
+          <input type="range" class="loop loop-{{thing.name}}" min="100" max="2000" value="500" step="100">
         </li>
       </ul>
     </div>
@@ -275,24 +276,206 @@
 </footer>
 <script>
 
+var interval = [];
+
+function play0() {
+  myAudio[0].pause();
+  myAudio[0].currentTime = 0;
+  myAudio[0].play();
+}
+function play1() {
+  myAudio[1].pause();
+  myAudio[1].currentTime = 0;
+  myAudio[1].play();
+}
+function play2() {
+  myAudio[2].pause();
+  myAudio[2].currentTime = 0;
+  myAudio[2].play();
+}
+function play3() {
+  myAudio[3].pause();
+  myAudio[3].currentTime = 0;
+  myAudio[3].play();
+}
+function play4() {
+  myAudio[4].pause();
+  myAudio[4].currentTime = 0;
+  myAudio[4].play();
+}
+function play5() {
+  myAudio[5].pause();
+  myAudio[5].currentTime = 0;
+  myAudio[5].play();
+}
+function play6() {
+  myAudio[6].pause();
+  myAudio[6].currentTime = 0;
+  myAudio[6].play();
+}
+function play7() {
+  myAudio[7].pause();
+  myAudio[7].currentTime = 0;
+  myAudio[7].play();
+}
+function play8() {
+  myAudio[8].pause();
+  myAudio[8].currentTime = 0;
+  myAudio[8].play();
+}
+function play9() {
+  myAudio[9].pause();
+  myAudio[9].currentTime = 0;
+  myAudio[9].play();
+}
+function play10() {
+  myAudio[10].pause();
+  myAudio[10].currentTime = 0;
+  myAudio[10].play();
+}
+function play11() {
+  myAudio[11].pause();
+  myAudio[11].currentTime = 0;
+  myAudio[11].play();
+}
+function play12() {
+  myAudio[12].pause();
+  myAudio[12].currentTime = 0;
+  myAudio[12].play();
+}
+function play13() {
+  myAudio[13].pause();
+  myAudio[13].currentTime = 0;
+  myAudio[13].play();
+}
+function play14() {
+  myAudio[14].pause();
+  myAudio[14].currentTime = 0;
+  myAudio[14].play();
+}
+function play15() {
+  myAudio[15].pause();
+  myAudio[15].currentTime = 0;
+  myAudio[15].play();
+}
+
+// sample looping functionality
+$('body').on('click', '.loop:eq(0)', function(){
+  interval[0] = setInterval(play0, document.querySelectorAll('.sample-player')[0].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(0)', function(){
+  clearInterval(interval[0]);
+});
+$('body').on('click', '.loop:eq(1)', function(){
+  interval[1] = setInterval(play1, document.querySelectorAll('.sample-player')[1].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(1)', function(){
+  clearInterval(interval[1]);
+});
+$('body').on('click', '.loop:eq(2)', function(){
+  interval[2] = setInterval(play2, document.querySelectorAll('.sample-player')[2].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(2)', function(){
+  clearInterval(interval[2]);
+});
+$('body').on('click', '.loop:eq(3)', function(){
+  interval[3] = setInterval(play3, document.querySelectorAll('.sample-player')[3].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(3)', function(){
+  clearInterval(interval[3]);
+});
+$('body').on('click', '.loop:eq(4)', function(){
+  interval[4] = setInterval(play4, document.querySelectorAll('.sample-player')[4].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(4)', function(){
+  clearInterval(interval[4]);
+});
+$('body').on('click', '.loop:eq(5)', function(){
+  interval[5] = setInterval(play5, document.querySelectorAll('.sample-player')[5].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(5)', function(){
+  clearInterval(interval[5]);
+});
+$('body').on('click', '.loop:eq(6)', function(){
+  interval[6] = setInterval(play6, document.querySelectorAll('.sample-player')[6].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(6)', function(){
+  clearInterval(interval[6]);
+});
+$('body').on('click', '.loop:eq(7)', function(){
+  interval[7] = setInterval(play7, document.querySelectorAll('.sample-player')[7].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(7)', function(){
+  clearInterval(interval[7]);
+});
+$('body').on('click', '.loop:eq(8)', function(){
+  interval[8] = setInterval(play8, document.querySelectorAll('.sample-player')[8].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(8)', function(){
+  clearInterval(interval[8]);
+});
+$('body').on('click', '.loop:eq(9)', function(){
+  interval[9] = setInterval(play9, document.querySelectorAll('.sample-player')[9].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(9)', function(){
+  clearInterval(interval[9]);
+});
+$('body').on('click', '.loop:eq(10)', function(){
+  interval[10] = setInterval(play10, document.querySelectorAll('.sample-player')[10].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(10)', function(){
+  clearInterval(interval[10]);
+});
+$('body').on('click', '.loop:eq(11)', function(){
+  interval[11] = setInterval(play11, document.querySelectorAll('.sample-player')[11].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(11)', function(){
+  clearInterval(interval[11]);
+});
+$('body').on('click', '.loop:eq(12)', function(){
+  interval[12] = setInterval(play12, document.querySelectorAll('.sample-player')[12].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(12)', function(){
+  clearInterval(interval[12]);
+});
+$('body').on('click', '.loop:eq(13)', function(){
+  interval[13] = setInterval(play13, document.querySelectorAll('.sample-player')[13].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(13)', function(){
+  clearInterval(interval[13]);
+});
+$('body').on('click', '.loop:eq(14)', function(){
+  interval[14] = setInterval(play14, document.querySelectorAll('.sample-player')[14].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(14)', function(){
+  clearInterval(interval[14]);
+});
+$('body').on('click', '.loop:eq(15)', function(){
+  interval[15] = setInterval(play15, document.querySelectorAll('.sample-player')[15].parentNode.parentNode.querySelector('.loop').value);
+});
+$('body').on('input', '.loop:eq(15)', function(){
+  clearInterval(interval[15]);
+});
+
+
+
+// start recording
 $('.record').on('click', function() {
   startUserMedia();
   startRecording();
 });
 
+// stop recording
 $('.stop').on('click', function() {
   stopRecording();
 });
 
+
+// recorderjs logi
   var recorder;
 
   function startUserMedia() {
     var input = recordNode;
-
-    // Uncomment if you want the audio to feedback directly
-    //input.connect(audio_context.destination);
-    //__log('Input connected to audio context destination.');
-
     recorder = new Recorder(input);
   }
 
@@ -330,14 +513,9 @@ $('.stop').on('click', function() {
 var audioCtx,
     myAudio,
     source,
-    recordNode;
-
-// Web audio api stuff starts here
-setTimeout(function () {
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  myAudio = document.querySelectorAll('audio');
-  // Create a MediaElementAudioSourceNode
-  // Feed the HTMLMediaElement into it
+    recordNode,
+    filterNodes,
+    delayNodes;
 
 source = [];
 function setSources() {
@@ -360,9 +538,15 @@ function setSources() {
     audioCtx.createMediaElementSource(myAudio[15])
   ];
 }
-setSources();
+
+function setSingleSource(n) {
+  source[n] = audioCtx.createMediaElementSource(myAudio[n]);
+}
 
 filterNodes = [];
+
+var filters = [];
+
 function setFilterNodes() {
   filterNodes = [
       audioCtx.createBiquadFilter(),
@@ -384,219 +568,228 @@ function setFilterNodes() {
   ];
 }
 
-setFilterNodes();
+function setFilterValues() {
 
-var filters = [];
-$('.filter').each(function() {
-  filters.push($(this));
-})
+  $('.filter').each(function() {
+    filters.push($(this));
+  });
 
-for (var n=0;n<16;n++) {
-  filterNodes[n].frequency.value = $(filters[n]).val();
-  filterNodes[n].type = "bandpass";
-  filterNodes[n].Q.value = 0;
+  for (var n=0;n<16;n++) {
+    filterNodes[n].frequency.value = $(filters[n]).val();
+    filterNodes[n].type = "bandpass";
+    filterNodes[n].Q.value = 1;
+  }
 }
 
-$(filters[0]).on('input', function() {
-      console.log(filterNodes[0]);
-      filterNodes[0].frequency.value = $(filters[0]).val();
-});
-$(filters[1]).on('input', function() {
-      filterNodes[1].frequency.value = $(filters[1]).val();
-});
-$(filters[2]).on('input', function() {
-      filterNodes[2].frequency.value = $(filters[2]).val();
-});
-$(filters[3]).on('input', function() {
-      filterNodes[3].frequency.value = $(filters[3]).val();
-});
-$(filters[4]).on('input', function() {
-      filterNodes[4].frequency.value = $(filters[4]).val();
-});
-$(filters[5]).on('input', function() {
-      filterNodes[5].frequency.value = $(filters[5]).val();
-});
-$(filters[6]).on('input', function() {
-      filterNodes[6].frequency.value = $(filters[6]).val();
-});
-$(filters[7]).on('input', function() {
-      filterNodes[7].frequency.value = $(filters[7]).val();
-});
-$(filters[8]).on('input', function() {
-      filterNodes[8].frequency.value = $(filters[8]).val();
-});
-$(filters[9]).on('input', function() {
-      filterNodes[9].frequency.value = $(filters[9]).val();
-});
-$(filters[10]).on('input', function() {
-      filterNodes[10].frequency.value = $(filters[10]).val();
-});
-$(filters[11]).on('input', function() {
-      filterNodes[11].frequency.value = $(filters[11]).val();
-});
-$(filters[12]).on('input', function() {
-      filterNodes[12].frequency.value = $(filters[12]).val();
-});
-$(filters[13]).on('input', function() {
-      filterNodes[13].frequency.value = $(filters[13]).val();
-});
-$(filters[14]).on('input', function() {
-      filterNodes[14].frequency.value = $(filters[14]).val();
-});
-$(filters[15]).on('input', function() {
-      filterNodes[15].frequency.value = $(filters[15]).val();
-});
-
-
-recordNode = audioCtx.createGain();
-
-// Set volume
-var gains = [];
-$('.gain').each(function() {
-  gains.push($(this));
-});
-
-$(gains[0]).on('input', function() {
-      $('.sample-player')[0].volume = $(gains[0]).val();
-});
-$(gains[1]).on('input', function() {
-      $('.sample-player')[1].volume = $(gains[1]).val();
-});
-$(gains[2]).on('input', function() {
-      $('.sample-player')[2].volume = $(gains[2]).val();
-});
-$(gains[3]).on('input', function() {
-      $('.sample-player')[3].volume = $(gains[3]).val();
-});
-$(gains[4]).on('input', function() {
-      $('.sample-player')[4].volume = $(gains[4]).val();
-});
-$(gains[5]).on('input', function() {
-      $('.sample-player')[5].volume = $(gains[5]).val();
-});
-$(gains[6]).on('input', function() {
-      $('.sample-player')[6].volume = $(gains[6]).val();
-});
-$(gains[7]).on('input', function() {
-      $('.sample-player')[7].volume = $(gains[7]).val();
-});
-$(gains[8]).on('input', function() {
-      $('.sample-player')[8].volume = $(gains[8]).val();
-});
-$(gains[9]).on('input', function() {
-      $('.sample-player')[9].volume = $(gains[9]).val();
-});
-$(gains[10]).on('input', function() {
-      $('.sample-player')[10].volume = $(gains[10]).val();
-});
-$(gains[11]).on('input', function() {
-      $('.sample-player')[11].volume = $(gains[11]).val();
-});
-$(gains[12]).on('input', function() {
-      $('.sample-player')[12].volume = $(gains[12]).val();
-});
-$(gains[13]).on('input', function() {
-      $('.sample-player')[13].volume = $(gains[13]).val();
-});
-$(gains[14]).on('input', function() {
-      $('.sample-player')[14].volume = $(gains[14]).val();
-});
-$(gains[15]).on('input', function() {
-      $('.sample-player')[15].volume = $(gains[15]).val();
-});
-
-
-// set playback rate
-var stretches = [];
-$('.stretch').each(function() {
-  stretches.push($(this));
-});
-
-$(stretches[0]).on('input', function() {
-      $('.sample-player')[0].playbackRate = $(stretches[0]).val();
-});
-$(stretches[1]).on('input', function() {
-      $('.sample-player')[1].playbackRate = $(stretches[1]).val();
-});
-$(stretches[2]).on('input', function() {
-      $('.sample-player')[2].playbackRate = $(stretches[2]).val();
-});
-$(stretches[3]).on('input', function() {
-      $('.sample-player')[3].playbackRate = $(stretches[3]).val();
-});
-$(stretches[4]).on('input', function() {
-      $('.sample-player')[4].playbackRate = $(stretches[4]).val();
-});
-$(stretches[5]).on('input', function() {
-      $('.sample-player')[5].playbackRate = $(stretches[5]).val();
-});
-$(stretches[6]).on('input', function() {
-      $('.sample-player')[6].playbackRate = $(stretches[6]).val();
-});
-$(stretches[7]).on('input', function() {
-      $('.sample-player')[7].playbackRate = $(stretches[7]).val();
-});
-$(stretches[8]).on('input', function() {
-      $('.sample-player')[8].playbackRate = $(stretches[8]).val();
-});
-$(stretches[9]).on('input', function() {
-      $('.sample-player')[9].playbackRate = $(stretches[9]).val();
-});
-$(stretches[10]).on('input', function() {
-      $('.sample-player')[10].playbackRate = $(stretches[10]).val();
-});
-$(stretches[11]).on('input', function() {
-      $('.sample-player')[11].playbackRate = $(stretches[11]).val();
-});
-$(stretches[12]).on('input', function() {
-      $('.sample-player')[12].playbackRate = $(stretches[12]).val();
-});
-$(stretches[13]).on('input', function() {
-      $('.sample-player')[13].playbackRate = $(stretches[13]).val();
-});
-$(stretches[14]).on('input', function() {
-      $('.sample-player')[14].playbackRate = $(stretches[14]).val();
-});
-$(stretches[15]).on('input', function() {
-      $('.sample-player')[15].playbackRate = $(stretches[15]).val();
-});
-
+function setDestinations() {
   // connect the AudioBufferSourceNode to the gainNode
   // and the gainNode to the destination, so we can play the
   // music and adjust the volume using the mouse cursor
-  source[0].connect(filterNodes[0]).connect(audioCtx.destination);
-  source[1].connect(filterNodes[1]).connect(audioCtx.destination);
-  source[2].connect(filterNodes[2]).connect(audioCtx.destination);
-  source[3].connect(filterNodes[3]).connect(audioCtx.destination);
-  source[4].connect(filterNodes[4]).connect(audioCtx.destination);
-  source[5].connect(filterNodes[5]).connect(audioCtx.destination);
-  source[6].connect(filterNodes[6]).connect(audioCtx.destination);
-  source[7].connect(filterNodes[7]).connect(audioCtx.destination);
-  source[8].connect(filterNodes[8]).connect(audioCtx.destination);
-  source[9].connect(filterNodes[9]).connect(audioCtx.destination);
-  source[10].connect(filterNodes[10]).connect(audioCtx.destination);
-  source[11].connect(filterNodes[11]).connect(audioCtx.destination);
-  source[12].connect(filterNodes[12]).connect(audioCtx.destination);
-  source[13].connect(filterNodes[13]).connect(audioCtx.destination);
-  source[14].connect(filterNodes[14]).connect(audioCtx.destination);
-  source[15].connect(filterNodes[15]).connect(audioCtx.destination);
-  source[0].connect(recordNode);
-  source[1].connect(recordNode);
-  source[2].connect(recordNode);
-  source[3].connect(recordNode);
-  source[4].connect(recordNode);
-  source[5].connect(recordNode);
-  source[6].connect(recordNode);
-  source[7].connect(recordNode);
-  source[8].connect(recordNode);
-  source[9].connect(recordNode);
-  source[10].connect(recordNode);
-  source[11].connect(recordNode);
-  source[12].connect(recordNode);
-  source[13].connect(recordNode);
-  source[14].connect(recordNode);
-  source[15].connect(recordNode);
-  recordNode.connect(audioCtx.destination);
+  source[0].connect(filterNodes[0]).connect(recordNode).connect(audioCtx.destination);
+  source[1].connect(filterNodes[1]).connect(recordNode).connect(audioCtx.destination);
+  source[2].connect(filterNodes[2]).connect(recordNode).connect(audioCtx.destination);
+  source[3].connect(filterNodes[3]).connect(recordNode).connect(audioCtx.destination);
+  source[4].connect(filterNodes[4]).connect(recordNode).connect(audioCtx.destination);
+  source[5].connect(filterNodes[5]).connect(recordNode).connect(audioCtx.destination);
+  source[6].connect(filterNodes[6]).connect(recordNode).connect(audioCtx.destination);
+  source[7].connect(filterNodes[7]).connect(recordNode).connect(audioCtx.destination);
+  source[8].connect(filterNodes[8]).connect(recordNode).connect(audioCtx.destination);
+  source[9].connect(filterNodes[9]).connect(recordNode).connect(audioCtx.destination);
+  source[10].connect(filterNodes[10]).connect(recordNode).connect(audioCtx.destination);
+  source[11].connect(filterNodes[11]).connect(recordNode).connect(audioCtx.destination);
+  source[12].connect(filterNodes[12]).connect(recordNode).connect(audioCtx.destination);
+  source[13].connect(filterNodes[13]).connect(recordNode).connect(audioCtx.destination);
+  source[14].connect(filterNodes[14]).connect(recordNode).connect(audioCtx.destination);
+  source[15].connect(filterNodes[15]).connect(recordNode).connect(audioCtx.destination);
+}
+
+function setRecordNode() {
+  recordNode = audioCtx.createGain();
+}
+
+function setAudio() {
+  myAudio = document.querySelectorAll('audio');
+}
+
+// Web audio api stuff starts here
+setTimeout(function () {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  setAudio();
+  // Create a MediaElementAudioSourceNode
+  // Feed the HTMLMediaElement into it
+
+  setSources();
+
+  setFilterNodes();
+
+  setFilterValues();
+
+  $(filters[0]).on('input', function() {
+        console.log(filterNodes[0]);
+        filterNodes[0].frequency.value = $(filters[0]).val();
+  });
+  $(filters[1]).on('input', function() {
+        filterNodes[1].frequency.value = $(filters[1]).val();
+  });
+  $(filters[2]).on('input', function() {
+        filterNodes[2].frequency.value = $(filters[2]).val();
+  });
+  $(filters[3]).on('input', function() {
+        filterNodes[3].frequency.value = $(filters[3]).val();
+  });
+  $(filters[4]).on('input', function() {
+        filterNodes[4].frequency.value = $(filters[4]).val();
+  });
+  $(filters[5]).on('input', function() {
+        filterNodes[5].frequency.value = $(filters[5]).val();
+  });
+  $(filters[6]).on('input', function() {
+        filterNodes[6].frequency.value = $(filters[6]).val();
+  });
+  $(filters[7]).on('input', function() {
+        filterNodes[7].frequency.value = $(filters[7]).val();
+  });
+  $(filters[8]).on('input', function() {
+        filterNodes[8].frequency.value = $(filters[8]).val();
+  });
+  $(filters[9]).on('input', function() {
+        filterNodes[9].frequency.value = $(filters[9]).val();
+  });
+  $(filters[10]).on('input', function() {
+        filterNodes[10].frequency.value = $(filters[10]).val();
+  });
+  $(filters[11]).on('input', function() {
+        filterNodes[11].frequency.value = $(filters[11]).val();
+  });
+  $(filters[12]).on('input', function() {
+        filterNodes[12].frequency.value = $(filters[12]).val();
+  });
+  $(filters[13]).on('input', function() {
+        filterNodes[13].frequency.value = $(filters[13]).val();
+  });
+  $(filters[14]).on('input', function() {
+        filterNodes[14].frequency.value = $(filters[14]).val();
+  });
+  $(filters[15]).on('input', function() {
+        filterNodes[15].frequency.value = $(filters[15]).val();
+  });
+
+
+
+  // Set volume
+  var gains = [];
+  $('.gain').each(function() {
+    gains.push($(this));
+  });
+
+  $(gains[0]).on('input', function() {
+        $('.sample-player')[0].volume = $(gains[0]).val();
+  });
+  $(gains[1]).on('input', function() {
+        $('.sample-player')[1].volume = $(gains[1]).val();
+  });
+  $(gains[2]).on('input', function() {
+        $('.sample-player')[2].volume = $(gains[2]).val();
+  });
+  $(gains[3]).on('input', function() {
+        $('.sample-player')[3].volume = $(gains[3]).val();
+  });
+  $(gains[4]).on('input', function() {
+        $('.sample-player')[4].volume = $(gains[4]).val();
+  });
+  $(gains[5]).on('input', function() {
+        $('.sample-player')[5].volume = $(gains[5]).val();
+  });
+  $(gains[6]).on('input', function() {
+        $('.sample-player')[6].volume = $(gains[6]).val();
+  });
+  $(gains[7]).on('input', function() {
+        $('.sample-player')[7].volume = $(gains[7]).val();
+  });
+  $(gains[8]).on('input', function() {
+        $('.sample-player')[8].volume = $(gains[8]).val();
+  });
+  $(gains[9]).on('input', function() {
+        $('.sample-player')[9].volume = $(gains[9]).val();
+  });
+  $(gains[10]).on('input', function() {
+        $('.sample-player')[10].volume = $(gains[10]).val();
+  });
+  $(gains[11]).on('input', function() {
+        $('.sample-player')[11].volume = $(gains[11]).val();
+  });
+  $(gains[12]).on('input', function() {
+        $('.sample-player')[12].volume = $(gains[12]).val();
+  });
+  $(gains[13]).on('input', function() {
+        $('.sample-player')[13].volume = $(gains[13]).val();
+  });
+  $(gains[14]).on('input', function() {
+        $('.sample-player')[14].volume = $(gains[14]).val();
+  });
+  $(gains[15]).on('input', function() {
+        $('.sample-player')[15].volume = $(gains[15]).val();
+  });
+
+
+  // set playback rate
+  var stretches = [];
+  $('.stretch').each(function() {
+    stretches.push($(this));
+  });
+
+  $(stretches[0]).on('input', function() {
+        $('.sample-player')[0].playbackRate = $(stretches[0]).val();
+  });
+  $(stretches[1]).on('input', function() {
+        $('.sample-player')[1].playbackRate = $(stretches[1]).val();
+  });
+  $(stretches[2]).on('input', function() {
+        $('.sample-player')[2].playbackRate = $(stretches[2]).val();
+  });
+  $(stretches[3]).on('input', function() {
+        $('.sample-player')[3].playbackRate = $(stretches[3]).val();
+  });
+  $(stretches[4]).on('input', function() {
+        $('.sample-player')[4].playbackRate = $(stretches[4]).val();
+  });
+  $(stretches[5]).on('input', function() {
+        $('.sample-player')[5].playbackRate = $(stretches[5]).val();
+  });
+  $(stretches[6]).on('input', function() {
+        $('.sample-player')[6].playbackRate = $(stretches[6]).val();
+  });
+  $(stretches[7]).on('input', function() {
+        $('.sample-player')[7].playbackRate = $(stretches[7]).val();
+  });
+  $(stretches[8]).on('input', function() {
+        $('.sample-player')[8].playbackRate = $(stretches[8]).val();
+  });
+  $(stretches[9]).on('input', function() {
+        $('.sample-player')[9].playbackRate = $(stretches[9]).val();
+  });
+  $(stretches[10]).on('input', function() {
+        $('.sample-player')[10].playbackRate = $(stretches[10]).val();
+  });
+  $(stretches[11]).on('input', function() {
+        $('.sample-player')[11].playbackRate = $(stretches[11]).val();
+  });
+  $(stretches[12]).on('input', function() {
+        $('.sample-player')[12].playbackRate = $(stretches[12]).val();
+  });
+  $(stretches[13]).on('input', function() {
+        $('.sample-player')[13].playbackRate = $(stretches[13]).val();
+  });
+  $(stretches[14]).on('input', function() {
+        $('.sample-player')[14].playbackRate = $(stretches[14]).val();
+  });
+  $(stretches[15]).on('input', function() {
+        $('.sample-player')[15].playbackRate = $(stretches[15]).val();
+  });
+
+  setRecordNode();
+
+  setDestinations();
 }, 1000);
 
 
@@ -619,6 +812,12 @@ $('body').on('click', '.kit-samples', function(){
   $('.choose-kit-button-holder').toggleClass('col-lg-8 col-lg-offset-2 col-lg-12');
   $('.kit-options').toggleClass('kit-options-open');
   $('.btn-choose-kit-close').toggleClass('hide');
+  setAudio();
+  setSources();
+  setFilterNodes();
+  setRecordNode();
+  setDestinations();
+  setFilterValues();
 });
 
 // show sample bank
@@ -663,6 +862,7 @@ $('.save-kit-button').click(function(){
     sampleurls.push($(this).attr('src'));
   });
 
+  // save sample names in new kit inputs
   $('.sample-1-name').attr('value', samplenames[0]).trigger('input');
   $('.sample-2-name').attr('value', samplenames[1]).trigger('input');
   $('.sample-3-name').attr('value', samplenames[2]).trigger('input');
@@ -727,6 +927,12 @@ $('.main-sample-holder').on('click', 'li', function(){
     $(this).find('.sample-inner').html(newSample);
     newSample = '';
     $('.save-kit-button').removeClass('hide');
+    setAudio();
+    setSingleSource($(this).index());
+    setFilterNodes();
+    setRecordNode();
+    setDestinations();
+    setFilterValues();
   }
   $(this).find('.sample-player')[0].pause();
   $(this).find('.sample-player')[0].currentTime = 0;

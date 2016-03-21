@@ -384,9 +384,6 @@ $(document).keyup(function(e) {
 });
 
 
-
-
-
 var directives = angular.module('directives', []);
 
 directives.directive('file', function() {
