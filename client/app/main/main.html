@@ -13,8 +13,14 @@
             <!-- <br><span class="sample-author">{{thing.author}}</span> -->
             <br><audio class="sample-player" crossorigin="anonymous" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
           </span>
-          <input type="range" class="filter filter-{{thing.name}}" min="0" max="5000" value="2500">
+          <select class="effects">
+            <option value="gain" selected="selected">Gain</option>
+            <option value="filter">Filter</option>
+            <option value="loop">Looper</option>
+            <option value="stretch">Stretch</option>
+          </select>
           <input type="range" class="gain gain-{{thing.name}}" min="0" max="1" value="1" step="0.1">
+          <input type="range" class="filter filter-{{thing.name}}" min="0" max="5000" value="2500">
           <input type="range" class="stretch stretch-{{thing.name}}" min="0.5" max="2" value="1" step="0.1">
           <input type="range" class="loop loop-{{thing.name}}" min="100" max="2000" value="500" step="100">
         </li>
@@ -131,15 +137,15 @@
       <button type="button" class="btn btn-primary btn-lg hide" id="btn-hide-bank">
         Hide Sample Bank <span class="btn-close-bank">&times;</span>
       </button>
-    </div>
-
-    <div class="col-lg-12 sample-bank">
-      <div class="col-lg-12 sample-bank-buttons">
+      <div class="col-lg-12 sample-bank-buttons hide">
         <input ng-model="query" class="sample-search" placeholder="Search for a sample">
         <button type="button" class="btn btn-primary btn-lg btn-add-sample" data-toggle="modal" data-target="#addSampleModal">
           + Upload a New Sample
         </button>
       </div>
+    </div>
+
+    <div class="col-lg-12 sample-bank">
       <ul class="nav nav-tabs nav-stacked col-lg-12">
         <li class="sample" ng-repeat="thing in awesomeThings | filter: query" onclick="reply_click(this.innerHTML);">
           <div class="sample-name">{{thing.name}}</div>
@@ -276,6 +282,41 @@
 </footer>
 <script>
 
+// allow for effects switching using dropdowns
+setTimeout(function(){
+  var effects = document.querySelectorAll('.effects');
+  for (var e = 0; e < 16; e++) {
+    var element = effects[e];
+    element.addEventListener('change', changeEffects);
+  }
+
+  function changeEffects(e, index) {
+    if (this.value == 'gain') {
+      this.parentNode.querySelector('.gain').style.display = 'block';
+      this.parentNode.querySelector('.filter').style.display = 'none';
+      this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelector('.stretch').style.display = 'none';
+    } else if (this.value == 'filter') {
+      this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelector('.filter').style.display = 'block';
+      this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelector('.stretch').style.display = 'none';
+    } else if (this.value == 'loop') {
+      this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelector('.filter').style.display = 'none';
+      this.parentNode.querySelector('.loop').style.display = 'block';
+      this.parentNode.querySelector('.stretch').style.display = 'none';
+    } else if (this.value == 'stretch') {
+      this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelector('.filter').style.display = 'none';
+      this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelector('.stretch').style.display = 'block';
+    }
+  }
+}, 1000);
+
+
+// this is for looping effect
 var interval = [];
 
 function play0() {
@@ -577,7 +618,7 @@ function setFilterValues() {
   for (var n=0;n<16;n++) {
     filterNodes[n].frequency.value = $(filters[n]).val();
     filterNodes[n].type = "bandpass";
-    filterNodes[n].Q.value = 1;
+    filterNodes[n].Q.value = 0;
   }
 }
 
@@ -826,13 +867,14 @@ $('#btn-show-bank').on('click', function(){
   $(this).parent().removeClass('col-lg-8');
   $(this).parent().removeClass('col-lg-offset-2');
   $(this).parent().addClass('col-lg-12');
-  $('#btn-hide-bank').removeClass('hide');
+  $('#btn-hide-bank, .sample-bank-buttons').removeClass('hide');
   $('.sample-bank').addClass('show-bank');
 });
 
 // hide sample bank
 $('#btn-hide-bank').on('click', function(){
   $(this).addClass('hide');
+  $('.sample-bank-buttons').addClass('hide');
   $(this).parent().removeClass('col-lg-12');
   $(this).parent().addClass('col-lg-8');
   $(this).parent().addClass('col-lg-offset-2');
@@ -933,14 +975,14 @@ $('.main-sample-holder').on('click', 'li', function(){
     setRecordNode();
     setDestinations();
     setFilterValues();
+    $(this).find('.sample-player')[0].pause();
+    $(this).find('.sample-player')[0].currentTime = 0;
+    $(this).find('.sample-player')[0].play();
   }
-  $(this).find('.sample-player')[0].pause();
-  $(this).find('.sample-player')[0].currentTime = 0;
-  $(this).find('.sample-player')[0].play();
 });
 
 // play samples on click
-$('body').on('click','.sample', function(){
+$('body').on('mousedown','.sample', function(){
   $(this).find('.sample-player')[0].pause();
   $(this).find('.sample-player')[0].currentTime = 0;
   $(this).find('.sample-player')[0].play();
