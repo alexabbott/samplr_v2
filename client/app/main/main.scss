@@ -16,6 +16,10 @@ body {
 .hide {
   display: none;
 }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .hero-unit {
     color: #000000;
@@ -26,10 +30,9 @@ body {
 }
 
 .footer {
-    text-align: center;
+    border-top: none;
     padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
+    text-align: center;
 }
 
 
@@ -293,15 +296,57 @@ body {
 }
 
 // record controls
-.record {
-  cursor: pointer;
+
+.recording {
   position: absolute;
+  left: 2%;
   top: 15%;
-  left: 2%;
+  .record {
+    background: #E5E5E5;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: background-color 0.5s ease-out;
+    width: 80px;
+  }
+  .stop {
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 80px;
+  }
+  .record-on {
+    background-color: #00ff00;
+    color: #fff;
+  }
+  audio {
+    float: left;
+    margin-bottom: 10px;
+    width: 45px;
+  }
+  a {
+    float: left;
+  }
 }
-.stop {
-  cursor: pointer;
+
+// metronome
+.met-bpm {
+  margin: 70px 0 -22px 22px;
+  input {
+    width: 52px;
+  }
+}
+.start-met {
+  bottom: -10px;
+  left: 30px;
   position: absolute;
-  top: 24%;
-  left: 2%;
+  img {
+    cursor: pointer;
+    width: 40px;
+  }
 }

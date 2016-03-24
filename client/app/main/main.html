@@ -27,8 +27,10 @@
       </ul>
     </div>
 
-    <div class="record">record</div>
-    <div class="stop">stop</div>
+    <div class="recording">
+      <div class="record">record</div>
+      <div class="stop hidden">stop</div>
+    </div>
 
     <div class="col-lg-8 col-lg-offset-2 save-kit-button-holder">
       <button type="button" class="btn btn-primary btn-lg save-kit-button hide" data-toggle="modal" data-target="#saveKitModal">
@@ -273,9 +275,10 @@
 </div>
 
   <div class="metronome">
-    <div><input class="met" type="number" name="bpm" value="60" size="3" /> bpm</div>
-    <div class="start-met btn">Start</div>
-    <div class="stop-met btn">Stop</div>
+    <div class="start-met">
+      <img src="../../assets/images/metronome.png" alt="metronome">
+    </div>
+    <div class="met-bpm hidden"><input class="met" type="number" name="bpm" value="60" size="3" /> bpm</div>
   </div>
 
 </div>
@@ -510,11 +513,15 @@ $('body').on('input', '.loop:eq(15)', function(){
 $('.record').on('click', function() {
   startUserMedia();
   startRecording();
+  $(this).addClass('record-on');
+  $('.stop').removeClass('hidden');
 });
 
 // stop recording
 $('.stop').on('click', function() {
   stopRecording();
+  $('.record').removeClass('record-on');
+  $(this).addClass('hidden');
 });
 
 
@@ -542,18 +549,20 @@ $('.stop').on('click', function() {
   function createDownloadLink() {
     recorder && recorder.exportWAV(function(blob) {
       var url = URL.createObjectURL(blob);
-      var li = document.createElement('li');
+      var div = document.createElement('div');
       var au = document.createElement('audio');
+      var br = document.createElement('br');
       var hf = document.createElement('a');
 
       au.controls = true;
       au.src = url;
       hf.href = url;
       hf.download = new Date().toISOString() + '.wav';
-      hf.innerHTML = hf.download;
-      li.appendChild(au);
-      li.appendChild(hf);
-      document.body.appendChild(li);
+      hf.innerHTML = "Download";
+      div.appendChild(au);
+      div.appendChild(br);
+      div.appendChild(hf);
+      document.getElementsByClassName('recording')[0].appendChild(div);
     });
   }
 
@@ -838,20 +847,6 @@ setTimeout(function () {
 
   setDestinations();
 
-
-  // shim layer with setTimeout fallback
-  window.requestAnimFrame = (function() {
-    return  window.requestAnimationFrame       ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame    ||
-      window.oRequestAnimationFrame      ||
-      window.msRequestAnimationFrame     ||
-      function( callback ){
-      window.setTimeout(callback, 1000 / 60);
-    };
-  })();
-
-
   // Add missing functions to make the oscillator compatible with the later standard.
   function fixOscillator(osc)
   {
@@ -865,104 +860,6 @@ setTimeout(function () {
         osc.noteOff(when);
       }
     }
-  }
-
-  // Change HTML in a DIV or other element for debugging
-  function writeMessageToID(id,message)
-  {
-    // Voodoo for browser compatibility.
-    d=document;
-    re = d.all ? d.all[id] : d.getElementById(id);
-    re.innerHTML=message;
-  }
-
-  function AudioVisualizer(width, height)
-  {
-    this.analyser = context.createAnalyser();
-
-    this.width = width;
-    this.height = height;
-    this.analyser.connect(context.destination);
-    this.analyser.minDecibels = -140;
-    this.analyser.maxDecibels = 0;
-    this.fft_smoothing = 0.6;
-    this.fft_size = 1024;
-
-    this.freqs = new Uint8Array(this.analyser.frequencyBinCount);
-    this.times = new Uint8Array(this.analyser.frequencyBinCount);
-    this.isPlaying = false;
-    this.drawCounter = 0;
-  }
-
-  AudioVisualizer.prototype.startAnimation = function()
-  {
-    this.isPlaying = true;
-      // Start visualizer.
-      requestAnimFrame(this.draw.bind(this));
-  }
-
-  AudioVisualizer.prototype.drawSpectrum = function(drawContext)
-  {
-    this.analyser.smoothingTimeConstant = this.fft_smoothing;
-    this.analyser.fftSize = this.fft_size;
-
-    // Get the frequency data from the currently playing music
-    this.analyser.getByteFrequencyData(this.freqs);
-
-    var width = Math.floor(1/this.freqs.length, 10);
-
-    drawContext.fillStyle = 'hsl(200, 100%, 50%)';
-    // Draw the frequency domain chart.
-    for (var i = 0; i < this.analyser.frequencyBinCount; i++) {
-      var value = this.freqs[i];
-      var percent = value / 256;
-      var height = this.height * percent;
-      var offset = this.height - height - 1;
-      var barWidth = this.width/this.analyser.frequencyBinCount;
-      drawContext.fillRect(i * barWidth, offset, barWidth, height);
-    }
-  }
-
-  AudioVisualizer.prototype.draw = function()
-  {
-    var canvas = document.querySelector('canvas');
-    var drawContext = canvas.getContext('2d');
-    canvas.width = this.width;
-    canvas.height = this.height;
-
-    this.drawSpectrum(drawContext);
-
-    if ((this.drawCounter & 15) == 0) {
-      this.analyser.getByteTimeDomainData(this.times);
-    }
-
-    // Draw the time domain chart.
-    //drawContext.beginPath();
-    drawContext.fillStyle = 'black';
-    drawContext.moveTo(0, this.height/2);
-    var barWidth = this.width/this.analyser.frequencyBinCount;
-    for (var i = 0; i < this.analyser.frequencyBinCount; i++) {
-    var value = this.times[i];
-    var percent = value / 256;
-    var height = this.height * percent;
-    var ypos = this.height - height - 1;
-    var xpos = i * barWidth;
-    drawContext.lineTo(xpos, ypos);
-    }
-    //drawContext.closePath();
-    drawContext.stroke();
-
-    this.drawCounter += 1;
-
-    if (this.isPlaying) {
-      requestAnimFrame(this.draw.bind(this));
-    }
-  }
-
-  AudioVisualizer.prototype.getFrequencyValue = function(freq) {
-    var nyquist = context.sampleRate/2;
-    var index = Math.round(freq/nyquist * this.freqs.length);
-    return this.freqs[index];
   }
 
   // metronome
@@ -1011,16 +908,31 @@ setTimeout(function () {
   var $t;
 
   function beep() {
-    startTone(200);
+    startTone(400);
   }
 
   $('.stop-met').click(function() {
     clearInterval($t);
   });
 
+  var metOn = false;
   $('.start-met').click(function() {
+    if (metOn === false) {
+      clearInterval($t);
+      $newbpm = 1000/$('.met').val()*60;
+      $t = setInterval(beep,$newbpm);
+      metOn = true;
+      $('.met-bpm').removeClass('hidden');
+    } else if (metOn === true ) {
+      clearInterval($t);
+      metOn = false;
+      $('.met-bpm').addClass('hidden');
+    }
+  });
+
+  $('.met').on('input', function(){
     clearInterval($t);
-    $newbpm = 1000*(Math.round($('.met').val()/60));
+    $newbpm = 1000/$('.met').val()*60;
     $t = setInterval(beep,$newbpm);
   });
 }, 1000);
