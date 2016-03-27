@@ -29,12 +29,9 @@ body {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.footer {
-    border-top: none;
-    padding: 30px 0;
-    text-align: center;
+.input-group {
+  width: 100%;
 }
-
 
 // nav
 .nav {
@@ -47,6 +44,10 @@ body {
 
 .navbar {
   margin-bottom: 0;
+  position: fixed;
+  .container {
+    width: 100vw;
+  }
 }
 
 .navbar-text {
@@ -54,14 +55,14 @@ body {
 }
 
 .navbar-default {
-  background: #fff;
+  background: rgba(255,255,255,0.8);
   border: none;
 
   .navbar-nav > .active > a {
     background: none;
   }
   .navbar-nav > li > a {
-    transition: opacity 0.5s;
+    transition: opacity 0.2s;
   }
   .navbar-nav > li > a:hover {
     opacity: 0.5;
@@ -71,6 +72,7 @@ body {
 
 // main sampler
 .main-sample-holder {
+  margin-top: 50px;
   padding: 0;
 }
 .nav-stacked {
@@ -140,15 +142,19 @@ body {
 .sample-bank {
   background: transparent;
   height: 0px;
+  margin-bottom: 120px;
   overflow: hidden;
   padding: 0;
-  transition: height 0.5s;
+  transition: height 0.2s;
+  width: 0px;
 
   &.show-bank {
     background: #D8D8D8;
     height: 500px;
     overflow: auto;
-    transition: height 0.5s ease-out, background 0.5s ease-out;
+    transition: 0.2s ease-out;
+    transition-property: height, background, width;
+    width: 100%;
   }
   h3 {
     text-align: center;
@@ -157,6 +163,12 @@ body {
     width: 11.1%;
     margin: 4px 6px !important;
   }
+}
+.author {
+  visibility: hidden;
+}
+.file-uploader {
+  margin-top: -20px;
 }
 
 
@@ -180,8 +192,10 @@ body {
   padding: 0;
 }
 
+.choose-kit-button-holder,
 .bank-button-holder {
-  transition: width 0.5s ease-out;
+  transition: 0.2s ease-out;
+  transition-property: margin-left, width;
 }
 
 .btn-primary {
@@ -192,7 +206,7 @@ body {
   font-weight: 100;
   margin: 10px 0 0 0;
   text-transform: uppercase;
-  transition: color 0.5s, background 0.5s;
+  transition: color 0.2s, background 0.2s;
   width: 100%;
 }
 
@@ -226,7 +240,7 @@ body {
     line-height: 40px;
     margin: 10px 0 0 0;
     padding: 0;
-    transition: background 0.5s ease-out, color 0.5s ease-out;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
     width: 250px;
     &:hover {
       background: #E5E5E5;
@@ -255,13 +269,21 @@ body {
   width: 90% !important;
 }
 
+.kit-author-input {
+  visibility: hidden;
+}
+
+.add-kit {
+  margin-top: 0;
+}
+
 
 // choose a kit
 .kit-options {
   background: transparent;
   height: 0;
   overflow: hidden;
-  transition: height 0.5s ease-out, background 0.5s ease-out;
+  transition: height 0.2s ease-out, background 0.2s ease-out;
   .kit-options-holder {
     margin-top: 30px;
   }
@@ -295,58 +317,145 @@ body {
   }
 }
 
-// record controls
 
-.recording {
-  position: absolute;
-  left: 2%;
-  top: 15%;
-  .record {
-    background: #E5E5E5;
-    cursor: pointer;
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 10px;
-    text-align: center;
-    transition: background-color 0.5s ease-out;
-    width: 80px;
-  }
-  .stop {
-    background-color: #ff0000;
-    color: #fff;
-    cursor: pointer;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    width: 80px;
-  }
-  .record-on {
-    background-color: #00ff00;
-    color: #fff;
-  }
-  audio {
-    float: left;
-    margin-bottom: 10px;
-    width: 45px;
-  }
-  a {
-    float: left;
-  }
+// modals
+.custom-modal {
+  background: #fff;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.4);
+  height: auto;
+  left: 50%;
+  position: fixed;
+  top: 60px;
+  transform: translateX(-25vw);
+  width: 50vw;
+  z-index: 99999999999;
 }
 
-// metronome
-.met-bpm {
-  margin: 70px 0 -22px 22px;
-  input {
-    width: 52px;
+// footer
+footer {
+  background: #eee;
+  border-top: none;
+  bottom: 0;
+  height: 50px;
+  left: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+
+  // metronome
+  .metronome {
+    display: inline-block;
+    height: 50px;
+    left: 20px;
+    position: absolute;
+    width: 200px;
+    .met-bpm {
+      display: inline-block;
+      margin: 13px 0 0 -20px;
+      input {
+        vertical-align: top;
+        width: 52px;
+      }
+      span {
+        display: inline-block;
+        margin-top: 4px;
+      }
+    }
+    .start-met {
+      display: inline-block;
+      left: 0;
+      position: absolute;
+      text-align: left;
+      img {
+        cursor: pointer;
+        height: 40px;
+        margin-top: 5px;
+      }
+    }
   }
-}
-.start-met {
-  bottom: -10px;
-  left: 30px;
-  position: absolute;
-  img {
+
+  // record controls
+  .recording {
+    margin-left: 37%;
+    text-align: left;
+    width: 50%;
+    div {
+      display: inline-block;
+    }
+    .record {
+      background: #00B900;
+      color: #fff;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      transition: background-color 0.2s ease-out;
+      width: 80px;
+    }
+    .stop {
+      background-color: #ff0000;
+      color: #fff;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      margin-left: -4px;
+      text-align: center;
+      width: 80px;
+    }
+    .record-on {
+      background-color: #fff;
+      color: #00B900;
+    }
+    audio {
+      float: left;
+      margin-top: 10px;
+      width: 45px;
+    }
+    a {
+      background: #868686;
+      color: #fff;
+      float: right;
+      line-height: 50px;
+      padding: 0 10px;
+    }
+    .record-time {
+      background: #9A9A9A;
+      color: #fff;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-left: -4px;
+      text-align: center;
+      width: 40px;
+    }
+    div:nth-of-type(n+4) {
+      height: 50px;
+      background: #1C1C1C;
+      margin: 0 4px 0 0;
+      vertical-align: middle;
+      width: 142px;
+    }
+  }
+
+  .support {
+    background: #666666;
+    border: 1px solid #666;
+    border-radius: 50%;
+    color: #fff;
     cursor: pointer;
-    width: 40px;
+    height: 25px;
+    line-height: 24px;
+    position: absolute;
+    right: 20px;
+    text-align: center;
+    top: 15px;
+    transition: 0.2s ease-out;
+    transition-property: background, color;
+    width: 25px;
+    &:hover {
+      background: #fff;
+      color: #666;
+    }
   }
+
 }

@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var KitSchema = new Schema({
   name: String,
+  author: String,
   sample1name: String,
   sample1info: String,
   sample1url: String,

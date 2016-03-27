@@ -13,7 +13,11 @@ function addURL(test){
   $('.src').attr('value',test);
 }
 
+
 var thisAuthor;
+$(window).load(function(){
+  thisAuthor = $('.navbar-text').text();
+});
 function addAuthor(){
   thisAuthor = $('.navbar-text').text();
   $('.author').attr('value',thisAuthor);
