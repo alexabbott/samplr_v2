@@ -8,11 +8,11 @@ angular.module('meanAppApp')
       });
   });
 
+var fileURL;
 function addURL(test){
   fileURL = test;
   $('.src').attr('value',test);
 }
-
 
 var thisAuthor;
 $(window).load(function(){

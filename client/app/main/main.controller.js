@@ -138,11 +138,10 @@ angular.module('meanAppApp')
           }
           else {
             // Upload Successfully Finished
-            toastr.success('File Uploaded Successfully', 'Done');
             $window.fileURL = 'https://samplerv2.s3.amazonaws.com/' + uniqueFileName;
             console.log('https://samplerv2.s3.amazonaws.com/' + uniqueFileName);
             $scope.fileURL = 'https://samplerv2.s3.amazonaws.com/' + uniqueFileName;
-            addThing();
+            $scope.addThing();
 
             // Reset The Progress Bar
             setTimeout(function() {
