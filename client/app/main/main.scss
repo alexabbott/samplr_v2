@@ -120,6 +120,28 @@ body {
        text-align-last: center;
        transform: translateX(-50%);
        width: 101%;
+       & + div:first-of-type {
+        canvas {
+          z-index: 1;
+        }
+       }
+       & + div  {
+       }
+    }
+    input {
+      margin-top: 36px !important;
+      margin-left: auto !important;
+      left: 83px !important;
+    }
+    & > div:nth-of-type(2) {
+      input {
+        left: 83px !important;
+      }
+    }
+    canvas {
+      left: 50%;
+      margin: 26px 0 0 -15px;
+      position: absolute;
     }
   }
   .selected {
@@ -343,6 +365,7 @@ footer {
   padding: 0;
   position: fixed;
   width: 100%;
+  z-index: 3;
 
   // metronome
   .metronome {

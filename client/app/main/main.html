@@ -1,8 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container">
-
   <div class="row">
-
     <div class="col-lg-12 main-sample-holder">
       <ul class="nav nav-tabs nav-stacked col-lg-8 col-lg-offset-2">
         <li class="sample" ng-repeat="thing in awesomeThings | limitTo: 16">
@@ -19,10 +17,10 @@
             <option value="loop">Looper</option>
             <option value="stretch">Stretch</option>
           </select>
-          <input type="range" class="gain gain-{{thing.name}}" min="0" max="1" value="1" step="0.1">
+          <input type="text" data-fgColor="#999999" data-width="30" data-height="30" data-min="0" data-max="1" data-step="0.1" data-value="1" class="gain gain-{{thing.name}}" min="0" max="1" value="1" step="0.1">
           <input type="range" class="filter filter-{{thing.name}}" min="0" max="5000" value="2500">
-          <input type="range" class="stretch stretch-{{thing.name}}" min="0.5" max="2" value="1" step="0.1">
-          <input type="range" class="loop loop-{{thing.name}}" min="100" max="2000" value="500" step="100">
+          <input type="text" data-fgColor="#999999" data-width="30" data-height="30" data-min="0.5" data-max="2" data-step="0.1" data-value="1"  class="stretch stretch-{{thing.name}}" min="0.5" max="2" value="1" step="0.1">
+          <input type="range" data-fgColor="#999999" data-width="30" data-height="30" data-min="100" data-max="2000" data-step="100" data-value="500" class="loop loop-{{thing.name}}" min="100" max="2000" value="500" step="100">
         </li>
       </ul>
     </div>
@@ -290,29 +288,199 @@ setTimeout(function(){
     element.addEventListener('change', changeEffects);
   }
 
+  $('.effects option[value="gain"]').attr("selected", "selected");
+
   function changeEffects(e, index) {
     if (this.value == 'gain') {
       this.parentNode.querySelector('.gain').style.display = 'block';
+      this.parentNode.querySelectorAll('div')[2].style.display = 'block';
       this.parentNode.querySelector('.filter').style.display = 'none';
+      // this.parentNode.querySelector('.filter').parentNode.querySelectorAll('div')[3].style.display = 'none';
       this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[4].style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[3].style.display = 'none';
     } else if (this.value == 'filter') {
       this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[2].style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'block';
+      // this.parentNode.querySelector('.filter').parentNode.querySelectorAll('div')[2].style.display = 'block';
       this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[4].style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'none';
+      this.parentNode.querySelector('.stretch').parentNode.querySelectorAll('div')[3].style.display = 'none';
     } else if (this.value == 'loop') {
       this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[2].style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'none';
+      // this.parentNode.querySelector('.filter').parentNode.querySelectorAll('div')[2].style.display = 'none';
       this.parentNode.querySelector('.loop').style.display = 'block';
+      this.parentNode.querySelectorAll('div')[4].style.display = 'block';
       this.parentNode.querySelector('.stretch').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[3].style.display = 'none';
     } else if (this.value == 'stretch') {
       this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[2].style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'none';
+      // this.parentNode.querySelector('.filter').parentNode.querySelectorAll('div')[2].style.display = 'none';
       this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelectorAll('div')[4].style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'block';
+      this.parentNode.querySelectorAll('div')[3].style.display = 'block';
     }
   }
+
+  // volume
+  $($(".gain").get(0)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[0].volume = v; }
+  });
+  $($(".gain").get(1)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[1].volume = v; }
+  });
+  $($(".gain").get(2)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[2].volume = v; }
+  });
+  $($(".gain").get(3)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[3].volume = v; }
+  });
+  $($(".gain").get(4)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[4].volume = v; }
+  });
+  $($(".gain").get(5)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[5].volume = v; }
+  });
+  $($(".gain").get(6)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[6].volume = v; }
+  });
+  $($(".gain").get(7)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[7].volume = v; }
+  });
+  $($(".gain").get(8)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[8].volume = v; }
+  });
+  $($(".gain").get(9)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[9].volume = v; }
+  });
+  $($(".gain").get(10)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[10].volume = v; }
+  });
+  $($(".gain").get(11)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[11].volume = v; }
+  });
+  $($(".gain").get(12)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[12].volume = v; }
+  });
+  $($(".gain").get(13)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[13].volume = v; }
+  });
+  $($(".gain").get(14)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[14].volume = v; }
+  });
+  $($(".gain").get(15)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[15].volume = v; }
+  });
+
+  // playback rate
+  $($(".stretch").get(0)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[0].playbackRate = v; }
+  });
+  $($(".stretch").get(1)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[1].playbackRate = v; }
+  });
+  $($(".stretch").get(2)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[2].playbackRate = v; }
+  });
+  $($(".stretch").get(3)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[3].playbackRate = v; }
+  });
+  $($(".stretch").get(4)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[4].playbackRate = v; }
+  });
+  $($(".stretch").get(5)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[5].playbackRate = v; }
+  });
+  $($(".stretch").get(6)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[6].playbackRate = v; }
+  });
+  $($(".stretch").get(7)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[7].playbackRate = v; }
+  });
+  $($(".stretch").get(8)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[8].playbackRate = v; }
+  });
+  $($(".stretch").get(9)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[9].playbackRate = v; }
+  });
+  $($(".stretch").get(10)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[10].playbackRate = v; }
+  });
+  $($(".stretch").get(11)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[11].playbackRate = v; }
+  });
+  $($(".stretch").get(12)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[12].playbackRate = v; }
+  });
+  $($(".stretch").get(13)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[13].playbackRate = v; }
+  });
+  $($(".stretch").get(14)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[14].playbackRate = v; }
+  });
+  $($(".stretch").get(15)).knob({
+    'change' : function (v) { document.querySelectorAll('.sample-player')[15].playbackRate = v; }
+  });
+
+  // loop
+  $($(".loop").get(0)).knob({
+    'change' : function (v) { interval[0] = setInterval(play0, v); },
+    'cancel' : function (v) { clearInterval(interval[0]); }
+  });
+  $($(".loop").get(1)).knob({
+    'change' : function (v) { interval[1] = setInterval(play1, v); }
+  });
+  $($(".loop").get(2)).knob({
+    'change' : function (v) { interval[2] = setInterval(play2, v); }
+  });
+  $($(".loop").get(3)).knob({
+    'change' : function (v) { interval[3] = setInterval(play3, v); }
+  });
+  $($(".loop").get(4)).knob({
+    'change' : function (v) { interval[4] = setInterval(play4, v); }
+  });
+  $($(".loop").get(5)).knob({
+    'change' : function (v) { interval[5] = setInterval(play5, v); }
+  });
+  $($(".loop").get(6)).knob({
+    'change' : function (v) { interval[6] = setInterval(play6, v); }
+  });
+  $($(".loop").get(7)).knob({
+    'change' : function (v) { interval[7] = setInterval(play7, v); }
+  });
+  $($(".loop").get(8)).knob({
+    'change' : function (v) { interval[8] = setInterval(play8, v); }
+  });
+  $($(".loop").get(9)).knob({
+    'change' : function (v) { interval[9] = setInterval(play9, v); }
+  });
+  $($(".loop").get(10)).knob({
+    'change' : function (v) { interval[10] = setInterval(play10, v); }
+  });
+  $($(".loop").get(11)).knob({
+    'change' : function (v) { interval[11] = setInterval(play11, v); }
+  });
+  $($(".loop").get(12)).knob({
+    'change' : function (v) { interval[12] = setInterval(play12, v); }
+  });
+  $($(".loop").get(13)).knob({
+    'change' : function (v) { interval[13] = setInterval(play13, v); }
+  });
+  $($(".loop").get(14)).knob({
+    'change' : function (v) { interval[14] = setInterval(play14, v); }
+  });
+  $($(".loop").get(15)).knob({
+    'change' : function (v) { interval[15] = setInterval(play15, v); }
+  });
+
 }, 1000);
 
 
@@ -401,102 +569,102 @@ function play15() {
 }
 
 // sample looping functionality
-$('body').on('click', '.loop:eq(0)', function(){
-  interval[0] = setInterval(play0, document.querySelectorAll('.sample-player')[0].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(0)', function(){
-  clearInterval(interval[0]);
-});
-$('body').on('click', '.loop:eq(1)', function(){
-  interval[1] = setInterval(play1, document.querySelectorAll('.sample-player')[1].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(1)', function(){
-  clearInterval(interval[1]);
-});
-$('body').on('click', '.loop:eq(2)', function(){
-  interval[2] = setInterval(play2, document.querySelectorAll('.sample-player')[2].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(2)', function(){
-  clearInterval(interval[2]);
-});
-$('body').on('click', '.loop:eq(3)', function(){
-  interval[3] = setInterval(play3, document.querySelectorAll('.sample-player')[3].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(3)', function(){
-  clearInterval(interval[3]);
-});
-$('body').on('click', '.loop:eq(4)', function(){
-  interval[4] = setInterval(play4, document.querySelectorAll('.sample-player')[4].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(4)', function(){
-  clearInterval(interval[4]);
-});
-$('body').on('click', '.loop:eq(5)', function(){
-  interval[5] = setInterval(play5, document.querySelectorAll('.sample-player')[5].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(5)', function(){
-  clearInterval(interval[5]);
-});
-$('body').on('click', '.loop:eq(6)', function(){
-  interval[6] = setInterval(play6, document.querySelectorAll('.sample-player')[6].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(6)', function(){
-  clearInterval(interval[6]);
-});
-$('body').on('click', '.loop:eq(7)', function(){
-  interval[7] = setInterval(play7, document.querySelectorAll('.sample-player')[7].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(7)', function(){
-  clearInterval(interval[7]);
-});
-$('body').on('click', '.loop:eq(8)', function(){
-  interval[8] = setInterval(play8, document.querySelectorAll('.sample-player')[8].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(8)', function(){
-  clearInterval(interval[8]);
-});
-$('body').on('click', '.loop:eq(9)', function(){
-  interval[9] = setInterval(play9, document.querySelectorAll('.sample-player')[9].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(9)', function(){
-  clearInterval(interval[9]);
-});
-$('body').on('click', '.loop:eq(10)', function(){
-  interval[10] = setInterval(play10, document.querySelectorAll('.sample-player')[10].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(10)', function(){
-  clearInterval(interval[10]);
-});
-$('body').on('click', '.loop:eq(11)', function(){
-  interval[11] = setInterval(play11, document.querySelectorAll('.sample-player')[11].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(11)', function(){
-  clearInterval(interval[11]);
-});
-$('body').on('click', '.loop:eq(12)', function(){
-  interval[12] = setInterval(play12, document.querySelectorAll('.sample-player')[12].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(12)', function(){
-  clearInterval(interval[12]);
-});
-$('body').on('click', '.loop:eq(13)', function(){
-  interval[13] = setInterval(play13, document.querySelectorAll('.sample-player')[13].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(13)', function(){
-  clearInterval(interval[13]);
-});
-$('body').on('click', '.loop:eq(14)', function(){
-  interval[14] = setInterval(play14, document.querySelectorAll('.sample-player')[14].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(14)', function(){
-  clearInterval(interval[14]);
-});
-$('body').on('click', '.loop:eq(15)', function(){
-  interval[15] = setInterval(play15, document.querySelectorAll('.sample-player')[15].parentNode.parentNode.querySelector('.loop').value);
-});
-$('body').on('input', '.loop:eq(15)', function(){
-  clearInterval(interval[15]);
-});
+// $('body').on('click', '.loop:eq(0)', function(){
+//   interval[0] = setInterval(play0, document.querySelectorAll('.sample-player')[0].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(0)', function(){
+//   clearInterval(interval[0]);
+// });
+// $('body').on('click', '.loop:eq(1)', function(){
+//   interval[1] = setInterval(play1, document.querySelectorAll('.sample-player')[1].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(1)', function(){
+//   clearInterval(interval[1]);
+// });
+// $('body').on('click', '.loop:eq(2)', function(){
+//   interval[2] = setInterval(play2, document.querySelectorAll('.sample-player')[2].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(2)', function(){
+//   clearInterval(interval[2]);
+// });
+// $('body').on('click', '.loop:eq(3)', function(){
+//   interval[3] = setInterval(play3, document.querySelectorAll('.sample-player')[3].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(3)', function(){
+//   clearInterval(interval[3]);
+// });
+// $('body').on('click', '.loop:eq(4)', function(){
+//   interval[4] = setInterval(play4, document.querySelectorAll('.sample-player')[4].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(4)', function(){
+//   clearInterval(interval[4]);
+// });
+// $('body').on('click', '.loop:eq(5)', function(){
+//   interval[5] = setInterval(play5, document.querySelectorAll('.sample-player')[5].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(5)', function(){
+//   clearInterval(interval[5]);
+// });
+// $('body').on('click', '.loop:eq(6)', function(){
+//   interval[6] = setInterval(play6, document.querySelectorAll('.sample-player')[6].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(6)', function(){
+//   clearInterval(interval[6]);
+// });
+// $('body').on('click', '.loop:eq(7)', function(){
+//   interval[7] = setInterval(play7, document.querySelectorAll('.sample-player')[7].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(7)', function(){
+//   clearInterval(interval[7]);
+// });
+// $('body').on('click', '.loop:eq(8)', function(){
+//   interval[8] = setInterval(play8, document.querySelectorAll('.sample-player')[8].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(8)', function(){
+//   clearInterval(interval[8]);
+// });
+// $('body').on('click', '.loop:eq(9)', function(){
+//   interval[9] = setInterval(play9, document.querySelectorAll('.sample-player')[9].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(9)', function(){
+//   clearInterval(interval[9]);
+// });
+// $('body').on('click', '.loop:eq(10)', function(){
+//   interval[10] = setInterval(play10, document.querySelectorAll('.sample-player')[10].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(10)', function(){
+//   clearInterval(interval[10]);
+// });
+// $('body').on('click', '.loop:eq(11)', function(){
+//   interval[11] = setInterval(play11, document.querySelectorAll('.sample-player')[11].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(11)', function(){
+//   clearInterval(interval[11]);
+// });
+// $('body').on('click', '.loop:eq(12)', function(){
+//   interval[12] = setInterval(play12, document.querySelectorAll('.sample-player')[12].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(12)', function(){
+//   clearInterval(interval[12]);
+// });
+// $('body').on('click', '.loop:eq(13)', function(){
+//   interval[13] = setInterval(play13, document.querySelectorAll('.sample-player')[13].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(13)', function(){
+//   clearInterval(interval[13]);
+// });
+// $('body').on('click', '.loop:eq(14)', function(){
+//   interval[14] = setInterval(play14, document.querySelectorAll('.sample-player')[14].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(14)', function(){
+//   clearInterval(interval[14]);
+// });
+// $('body').on('click', '.loop:eq(15)', function(){
+//   interval[15] = setInterval(play15, document.querySelectorAll('.sample-player')[15].parentNode.parentNode.querySelector('.loop').value);
+// });
+// $('body').on('input', '.loop:eq(15)', function(){
+//   clearInterval(interval[15]);
+// });
 
 
 var displayTime;
@@ -725,119 +893,6 @@ setTimeout(function () {
     filterNodes[15].frequency.value = $(filters[15]).val();
   });
 
-
-
-  // Set volume
-  var gains = [];
-  $('.gain').each(function() {
-    gains.push($(this));
-  });
-
-  $(gains[0]).on('input', function() {
-    $('.sample-player')[0].volume = $(gains[0]).val();
-  });
-  $(gains[1]).on('input', function() {
-    $('.sample-player')[1].volume = $(gains[1]).val();
-  });
-  $(gains[2]).on('input', function() {
-    $('.sample-player')[2].volume = $(gains[2]).val();
-  });
-  $(gains[3]).on('input', function() {
-    $('.sample-player')[3].volume = $(gains[3]).val();
-  });
-  $(gains[4]).on('input', function() {
-    $('.sample-player')[4].volume = $(gains[4]).val();
-  });
-  $(gains[5]).on('input', function() {
-    $('.sample-player')[5].volume = $(gains[5]).val();
-  });
-  $(gains[6]).on('input', function() {
-    $('.sample-player')[6].volume = $(gains[6]).val();
-  });
-  $(gains[7]).on('input', function() {
-    $('.sample-player')[7].volume = $(gains[7]).val();
-  });
-  $(gains[8]).on('input', function() {
-    $('.sample-player')[8].volume = $(gains[8]).val();
-  });
-  $(gains[9]).on('input', function() {
-    $('.sample-player')[9].volume = $(gains[9]).val();
-  });
-  $(gains[10]).on('input', function() {
-    $('.sample-player')[10].volume = $(gains[10]).val();
-  });
-  $(gains[11]).on('input', function() {
-    $('.sample-player')[11].volume = $(gains[11]).val();
-  });
-  $(gains[12]).on('input', function() {
-    $('.sample-player')[12].volume = $(gains[12]).val();
-  });
-  $(gains[13]).on('input', function() {
-    $('.sample-player')[13].volume = $(gains[13]).val();
-  });
-  $(gains[14]).on('input', function() {
-    $('.sample-player')[14].volume = $(gains[14]).val();
-  });
-  $(gains[15]).on('input', function() {
-    $('.sample-player')[15].volume = $(gains[15]).val();
-  });
-
-
-  // set playback rate
-  var stretches = [];
-  $('.stretch').each(function() {
-    stretches.push($(this));
-  });
-
-  $(stretches[0]).on('input', function() {
-    $('.sample-player')[0].playbackRate = $(stretches[0]).val();
-  });
-  $(stretches[1]).on('input', function() {
-    $('.sample-player')[1].playbackRate = $(stretches[1]).val();
-  });
-  $(stretches[2]).on('input', function() {
-    $('.sample-player')[2].playbackRate = $(stretches[2]).val();
-  });
-  $(stretches[3]).on('input', function() {
-    $('.sample-player')[3].playbackRate = $(stretches[3]).val();
-  });
-  $(stretches[4]).on('input', function() {
-    $('.sample-player')[4].playbackRate = $(stretches[4]).val();
-  });
-  $(stretches[5]).on('input', function() {
-    $('.sample-player')[5].playbackRate = $(stretches[5]).val();
-  });
-  $(stretches[6]).on('input', function() {
-    $('.sample-player')[6].playbackRate = $(stretches[6]).val();
-  });
-  $(stretches[7]).on('input', function() {
-    $('.sample-player')[7].playbackRate = $(stretches[7]).val();
-  });
-  $(stretches[8]).on('input', function() {
-    $('.sample-player')[8].playbackRate = $(stretches[8]).val();
-  });
-  $(stretches[9]).on('input', function() {
-    $('.sample-player')[9].playbackRate = $(stretches[9]).val();
-  });
-  $(stretches[10]).on('input', function() {
-    $('.sample-player')[10].playbackRate = $(stretches[10]).val();
-  });
-  $(stretches[11]).on('input', function() {
-    $('.sample-player')[11].playbackRate = $(stretches[11]).val();
-  });
-  $(stretches[12]).on('input', function() {
-    $('.sample-player')[12].playbackRate = $(stretches[12]).val();
-  });
-  $(stretches[13]).on('input', function() {
-    $('.sample-player')[13].playbackRate = $(stretches[13]).val();
-  });
-  $(stretches[14]).on('input', function() {
-    $('.sample-player')[14].playbackRate = $(stretches[14]).val();
-  });
-  $(stretches[15]).on('input', function() {
-    $('.sample-player')[15].playbackRate = $(stretches[15]).val();
-  });
-
   setRecordNode();
 
   setDestinations();
@@ -902,10 +957,6 @@ setTimeout(function () {
   function beep() {
     startTone(400);
   }
-
-  $('.stop-met').click(function() {
-    clearInterval($t);
-  });
 
   var metOn = false;
   $('.start-met').click(function() {
