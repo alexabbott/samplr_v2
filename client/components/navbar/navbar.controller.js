@@ -3,7 +3,7 @@
 angular.module('meanAppApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'SAMPLR',
+      'title': 'SMPLR',
       'link': '/'
     }];
 

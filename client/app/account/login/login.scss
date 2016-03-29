@@ -16,6 +16,45 @@ $btnGithubBackgroundHighlight:      #ccc;
 // Social buttons
 // --------------------------------------------------
 
+.login, .sign-up, .password-change {
+  padding-top: 70px;
+  text-align: center;
+  text-transform: uppercase;
+  input {
+    margin: 0 auto;
+    width: 400px;
+  }
+}
+
+.btn-login, .btn-register {
+  border-radius: 2px;
+}
+
+.my-samples {
+  font-size: 18px;
+  padding: 70px 0 0 23px;
+}
+
+.my-kits {
+  font-size: 18px;
+  padding: 40px 0 0 23px;
+}
+
+.user-samples, .user-kits {
+  height: auto;
+  max-height: 500px;
+  overflow: scroll;
+  padding-left: 23px;
+}
+
+.password-change-form {
+  margin-bottom: 50px;
+  button {
+    border-radius: 2px;
+    width: 300px;
+  }
+}
+
 .btn-facebook {
   @include button-variant($btnText, $btnFacebookBackgroundHighlight, $btnFacebookBackgroundHighlight);
 }

@@ -1,11 +1,27 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
+<div class="my-samples">My Samples</div>
+<ul class="nav-stacked user-samples">
+  <li class="sample" ng-repeat="thing in awesomeThings | filter: { author: getCurrentUser().name }">
+    <div class="sample-name">{{ thing.name }}</div>
+    <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+    <br><audio class="sample-player" crossorigin="anonymous" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+  </li>
+</ul>
+
+<div class="my-samples">My Kits</div>
+<ul class="nav-stacked user-samples">
+  <li class="sample" ng-repeat="kit in awesomeKits | filter: { author: getCurrentUser().name }">
+    <div class="sample-name">{{ kit.name }}</div>
+  </li>
+</ul>
+
+<div class="container password-change">
   <div class="row">
     <div class="col-sm-12">
       <h1>Change Password</h1>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12 password-change-form">
       <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
 
         <div class="form-group">

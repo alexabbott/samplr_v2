@@ -8,7 +8,6 @@
             <div class="sample-name">{{thing.name}}</div>
             <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
             <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-            <!-- <br><span class="sample-author">{{thing.author}}</span> -->
             <br><audio class="sample-player" crossorigin="anonymous" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
           </span>
           <select class="effects">
@@ -149,7 +148,6 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -161,7 +159,6 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -173,19 +170,17 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
         </div>
         <div class="category">
-          <div class="category-title">Percussion</div>
+          <div class="category-title">Perc</div>
           <div class="sample-category">
             <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Perc'" onclick="reply_click(this.innerHTML);">
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -197,7 +192,6 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -209,7 +203,6 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -221,7 +214,6 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -233,7 +225,6 @@
               <div class="sample-name">{{thing.name}}</div>
               <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
               <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
               <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
             </li>
           </div>
@@ -277,6 +268,7 @@
                   </div>
                 </div>
                 <a class="btn btn-primary btn-block btn-lg sample-upload-button" ng-click="upload()" onclick="setTimeout(function(){addURL(fileURL)},2000);">Upload</a>
+                <span class="copyright-warning">** Uploading of copyrighted samples is prohibited **</span>
               </div>
             </div>
           </p>

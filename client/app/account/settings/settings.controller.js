@@ -1,8 +1,20 @@
 'use strict';
 
 angular.module('meanAppApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $http, User, Auth) {
     $scope.errors = {};
+
+    $http.get('/api/things').success(function(awesomeThings) {
+      $scope.awesomeThings = awesomeThings;
+      socket.syncUpdates('thing', $scope.awesomeThings);
+    });
+
+    $http.get('/api/kits').success(function(awesomeKits) {
+      $scope.awesomeKits = awesomeKits;
+      socket.syncUpdates('kit', $scope.awesomeKits);
+    });
+
+    $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;

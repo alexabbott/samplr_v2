@@ -206,11 +206,17 @@ body {
     width: 11.1%
   }
 }
-.author {
+.author, .src {
   visibility: hidden;
 }
 .file-uploader {
-  margin-top: -20px;
+  margin-top: -45px;
+}
+.copyright-warning {
+  display: block;
+  font-size: 8px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 
@@ -273,7 +279,7 @@ body {
 .sample-bank-buttons {
   background: #D8D8D8;
   height: 57px;
-  padding: 0 24px;
+  padding: 0 16px;
   .btn-add-sample {
     background: #AEAEAE;
     color: #fff;
@@ -334,6 +340,7 @@ body {
 .kit-options-open {
   background: #D8D8D8;
   height: 500px;
+  overflow: scroll;
 }
 
 .kit-samples {
@@ -396,7 +403,7 @@ footer {
     width: 200px;
     .met-bpm {
       display: inline-block;
-      margin: 13px 0 0 -20px;
+      margin: 13px 0 0 40px;
       input {
         vertical-align: top;
         width: 52px;
@@ -503,4 +510,92 @@ footer {
     }
   }
 
+}
+
+.mobile-logo {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  .mobile-logo {
+    display: inline-block;
+    float: left;
+    margin: 18px 0 0 20px;
+    text-align: left;
+  }
+  .nav-stacked {
+    li {
+      height: 100px;
+      margin: 4px 8px;
+      width: 20%;
+      .sample-inner {
+        .sample-name {
+          margin-top: 3px;
+        }
+      }
+      .effects {
+        bottom: 0;
+      }
+      canvas {
+        margin: -14px 0 0 -15px;
+      }
+    }
+  }
+  .sample-bank-buttons {
+    height: 115px;
+    .btn-add-sample {
+      float: left;
+    }
+  }
+  .sample-bank {
+    &.show-bank {
+      height: auto;
+    }
+    .category {
+      margin: 0px 3px 20px 3px;
+      width: 20%;
+      .sample-category {
+        height: 250px;
+        li {
+          width: 100%;
+        }
+      }
+    }
+  }
+  footer {
+    .metronome {
+      left: 10px;
+      width: auto;
+      .met-bpm {
+        span {
+          display: none;
+        }
+      }
+    }
+    .recording {
+      background: #9A9A9A;
+      width: 65%;
+      .record {
+        width: 75px;
+      }
+      .stop {
+        width: 65px;
+      }
+      .record-time {
+        width: 60px;
+      }
+      audio {
+        margin-left: 85px;
+      }
+      div:nth-of-type(n+4) {
+        left: 0;
+        position: absolute;
+        top: -50px;
+        width: 100%;
+      }
+    }
+    .support {
+      display: none;
+    }
+  }
 }
