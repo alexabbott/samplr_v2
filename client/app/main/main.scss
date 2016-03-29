@@ -182,8 +182,28 @@ body {
     text-align: center;
   }
   li {
-    width: 11.1%;
-    margin: 4px 6px !important;
+    display: block;
+    margin: 4px 0px !important;
+    vertical-align: top;
+    width: 100%;
+  }
+  .sample-category {
+    display: inline-block;
+    height: 460px;
+    overflow: scroll;
+    text-align: center;
+    vertical-align: top;
+    width: 100%
+  }
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+  .category {
+    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    width: 11.1%
   }
 }
 .author {

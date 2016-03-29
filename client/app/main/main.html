@@ -142,13 +142,102 @@
 
     <div class="col-lg-12 sample-bank">
       <ul class="nav nav-tabs nav-stacked col-lg-12">
-        <li class="sample" ng-repeat="thing in awesomeThings | filter: query" onclick="reply_click(this.innerHTML);">
-          <div class="sample-name">{{thing.name}}</div>
-          <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
-          <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
-          <!-- <br><span class="sample-author">{{thing.author}}</span> -->
-          <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
-        </li>
+        <div class="category">
+          <div class="category-title">Kick</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Kick'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">Snare</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Snare'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">Cymbal</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Cymbal'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">Percussion</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Perc'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">Bass</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Bass'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">Lead</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Lead'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">Vocal</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'Vocal'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-title">FX</div>
+          <div class="sample-category">
+            <li class="sample" ng-repeat="thing in awesomeThings | filter: query" ng-if="thing.info == 'FX'" onclick="reply_click(this.innerHTML);">
+              <div class="sample-name">{{thing.name}}</div>
+              <!-- <button type="button" class="close" ng-click="deleteThing(thing)">&times;</button> -->
+              <div style="font-size: 8px;" class="sample-info">{{thing.info}}</div>
+              <!-- <br><span class="sample-author">{{thing.author}}</span> -->
+              <br><audio crossorigin="anonymous" class="sample-player" src="{{trustSrc(thing.url)}}" alt="{{thing.url}}"></audio>
+            </li>
+          </div>
+        </div>
       </ul>
     </div>
 
@@ -191,8 +280,7 @@
               </div>
             </div>
           </p>
-<!--           <button type="submit" class="btn btn-primary btn-submit" ng-click="addThing()" >Add New Sample</button>
- -->        </form>
+        </form>
       </div>
     </div>
 
