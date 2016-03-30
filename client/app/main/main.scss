@@ -533,8 +533,8 @@ footer {
           margin-top: 3px;
         }
       }
-      .effects {
-        bottom: 0;
+      .effects, .loop, .filter, .stretch, .gain {
+        display: none;
       }
       canvas {
         margin: -14px 0 0 -15px;
