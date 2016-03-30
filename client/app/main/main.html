@@ -773,10 +773,12 @@ $('.sample-upload-button').click(function(){
     $('.form-control.src').trigger('input');
     $('#addSampleModal').addClass('hide');
   }, 2000);
+  keysActive = true;
 });
 
 $('.add-kit').click(function(){
   $('#saveKitModal').addClass('hide');
+  keysActive = true;
 });
 
 $('.close').click(function() {
