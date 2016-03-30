@@ -546,7 +546,7 @@ function stopRecording() {
       filters.push(document.querySelectorAll('.filter')[n]);
       filterNodes[n].frequency.value = $(filters[n]).val();
       filterNodes[n].type = "bandpass";
-      filterNodes[n].Q.value = 1;
+      filterNodes[n].Q.value = 0;
     }
   }
 
@@ -737,6 +737,7 @@ $('body').on('click', '.kit-samples', function(){
   setFilterValues();
   setGainValues();
   setRateValues();
+  keysActive = true;
 });
 
 // show sample bank
@@ -798,6 +799,8 @@ $('.save-kit-button').click(function(){
     sampleurls.push($(this).attr('src'));
   });
 
+
+  var kitInputs = document.querySelectorAll('.save-kit-input');
   // save sample names in new kit inputs
   $('.kit-author-input').attr('value', thisAuthor).trigger('input');
   $('.sample-1-name').attr('value', samplenames[0]).trigger('input');
