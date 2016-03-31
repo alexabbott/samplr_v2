@@ -6,12 +6,10 @@ angular.module('meanAppApp')
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
     $http.get('/api/kits').success(function(awesomeKits) {
       $scope.awesomeKits = awesomeKits;
-      socket.syncUpdates('kit', $scope.awesomeKits);
     });
 
     $scope.getCurrentUser = Auth.getCurrentUser;

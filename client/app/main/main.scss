@@ -105,6 +105,13 @@ body {
     .filter, .stretch, .loop {
       display: none;
     }
+    .loop {
+      &.looping {
+        &::-webkit-slider-thumb {
+          background: #000;
+        }
+      }
+    }
     .effects {
        background: #f1f1f1;
        border: 0;
@@ -186,6 +193,9 @@ body {
     margin: 4px 0px !important;
     vertical-align: top;
     width: 100%;
+    &.ready {
+      background: #fff;
+    }
   }
   .sample-category {
     display: inline-block;

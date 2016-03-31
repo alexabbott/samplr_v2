@@ -37,6 +37,10 @@ angular.module('meanAppApp')
       if($scope.newKit === '') {
         return;
       }
+      if (!$scope.newKit) {
+        alert('Your kit must have a name');
+        return false;
+      }
       $http.post('/api/kits', { name: $scope.newKit, author: $scope.newKitAuthor, sample1name: $scope.newKitSample1Name, sample1info: $scope.newKitSample1Info, sample1url: $scope.newKitSample1Url, sample2name: $scope.newKitSample2Name, sample2info: $scope.newKitSample2Info, sample2url: $scope.newKitSample2Url, sample3name: $scope.newKitSample3Name, sample3info: $scope.newKitSample3Info, sample3url: $scope.newKitSample3Url, sample4name: $scope.newKitSample4Name, sample4info: $scope.newKitSample4Info, sample4url: $scope.newKitSample4Url, sample5name: $scope.newKitSample5Name, sample5info: $scope.newKitSample5Info, sample5url: $scope.newKitSample5Url, sample6name: $scope.newKitSample6Name, sample6info: $scope.newKitSample6Info, sample6url: $scope.newKitSample6Url, sample7name: $scope.newKitSample7Name, sample7info: $scope.newKitSample7Info, sample7url: $scope.newKitSample7Url, sample8name: $scope.newKitSample8Name, sample8info: $scope.newKitSample8Info, sample8url: $scope.newKitSample8Url, sample9name: $scope.newKitSample9Name, sample9info: $scope.newKitSample9Info, sample9url: $scope.newKitSample9Url, sample10name: $scope.newKitSample10Name, sample10info: $scope.newKitSample10Info, sample10url: $scope.newKitSample10Url, sample11name: $scope.newKitSample11Name, sample11info: $scope.newKitSample11Info, sample11url: $scope.newKitSample11Url, sample12name: $scope.newKitSample12Name, sample12info: $scope.newKitSample12Info, sample12url: $scope.newKitSample12Url, sample13name: $scope.newKitSample13Name, sample13info: $scope.newKitSample13Info, sample13url: $scope.newKitSample13Url, sample14name: $scope.newKitSample14Name, sample14info: $scope.newKitSample14Info, sample14url: $scope.newKitSample14Url, sample15name: $scope.newKitSample15Name, sample15info: $scope.newKitSample15Info, sample15url: $scope.newKitSample15Url, sample16name: $scope.newKitSample16Name, sample16info: $scope.newKitSample16Info, sample16url: $scope.newKitSample16Url });
       $scope.newKitAuthor = '';
       $scope.newKitSample1Name = '';
@@ -87,7 +91,8 @@ angular.module('meanAppApp')
       $scope.newKitSample16Name = '';
       $scope.newKitSample16Info = '';
       $scope.newKitSample16Url = '';
-
+      angular.element(document.getElementById('saveKitModal')).addClass('hide');
+      $window.keysActive = true;
     };
 
     $scope.deleteThing = function(thing) {
@@ -112,6 +117,7 @@ angular.module('meanAppApp')
   $scope.sizeLimit      = 3145728; // 3MB in Bytes
   $scope.uploadProgress = 0;
 
+
   $window.fileURL;
   $scope.fileURL;
   $scope.upload = function() {
@@ -124,6 +130,14 @@ angular.module('meanAppApp')
         var fileSize = Math.round(parseInt($scope.file.size));
         if (fileSize > $scope.sizeLimit) {
           alert('File must be under 3mb');
+          return false;
+        }
+        if (!$scope.newThing) {
+          alert('Your sample must have a name');
+          return false;
+        }
+        if (!$scope.newThingInfo) {
+          alert('You must choose a category for your sample');
           return false;
         }
         // Prepend Unique String To Prevent Overwrites
@@ -173,4 +187,43 @@ angular.module('meanAppApp')
     }
     return text;
   }
+
+  // button actions
+  $scope.showBank = function() {
+    angular.element(document.getElementById('btn-show-bank')).addClass('hide');
+    angular.element(document.querySelector('.bank-button-holder')).removeClass('col-lg-8');
+    angular.element(document.querySelector('.bank-button-holder')).removeClass('col-lg-offset-2');
+    angular.element(document.querySelector('.bank-button-holder')).addClass('col-lg-12');
+    angular.element(document.getElementById('btn-hide-bank')).removeClass('hide');
+    angular.element(document.querySelector('.sample-bank-buttons')).removeClass('hide');
+    angular.element(document.querySelector('.sample-bank')).addClass('show-bank');
+  }
+
+  $scope.hideBank = function() {
+    angular.element(document.getElementById('btn-hide-bank')).addClass('hide');
+    angular.element(document.querySelector('.sample-bank-buttons')).addClass('hide');
+    angular.element(document.querySelector('.bank-button-holder')).addClass('col-lg-8');
+    angular.element(document.querySelector('.bank-button-holder')).addClass('col-lg-offset-2');
+    angular.element(document.querySelector('.bank-button-holder')).removeClass('col-lg-12');
+    angular.element(document.getElementById('btn-show-bank')).removeClass('hide');
+    angular.element(document.querySelector('.sample-bank')).removeClass('show-bank');
+  }
+
+  $scope.openSampleModal = function() {
+    angular.element(document.getElementById('addSampleModal')).removeClass('hide');
+    $window.keysActive = false;
+  }
+
+  $scope.closeAllModals = function() {
+    var sampleModal = angular.element(document.getElementById('addSampleModal'));
+    var kitModal = angular.element(document.getElementById('saveKitModal'));
+    if (!sampleModal.hasClass('hide')) {
+      sampleModal.addClass('hide');
+    }
+    if (!kitModal.hasClass('hide')) {
+      kitModal.addClass('hide');
+    }
+    $window.keysActive = true;
+  }
+
   });
