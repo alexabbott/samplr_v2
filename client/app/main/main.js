@@ -609,8 +609,8 @@ $(window).load(function(){
     for (var n=0;n<16;n++) {
       filters.push(document.querySelectorAll('.filter')[n]);
       filterNodes[n].frequency.value = $(filters[n]).val();
-      filterNodes[n].type = "bandpass";
-      filterNodes[n].Q.value = 1;
+      filterNodes[n].type = "lowpass";
+      filterNodes[n].Q.value = 0;
     }
   }
 
@@ -660,7 +660,7 @@ $(window).load(function(){
 
   // set metronome pitch
   function beep() {
-      startTone(400);
+      startTone(600);
   }
 
   // Create an metronome node
