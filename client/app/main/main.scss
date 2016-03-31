@@ -1,13 +1,13 @@
 body {
   font-family: 'Work Sans', arial, sans-serif;
   font-weight: 100;
+  position: relative;
   text-transform: uppercase;
 }
 
 .container {
   text-align: center;
 }
-
 
 .thing-form {
     margin: 20px 0;
@@ -392,6 +392,38 @@ body {
   z-index: 99999999999;
 }
 
+// tracks
+.tracks {
+  bottom: 50px;
+  max-height: 150px;
+  overflow: scroll;
+  padding-right: 30px;
+  position: fixed;
+  width: 100%;
+  div {
+    background: #1C1C1C;
+    border-top: 1px solid #f1f1f1;
+    height: 50px;
+    vertical-align: middle;
+    width: 100%;
+  }
+  audio {
+    float: left;
+    height: 50px;
+    margin-top: -10px;
+    width: 80%;
+  }
+  a {
+    background: #868686;
+    color: #fff;
+    float: right;
+    height: 49px;
+    line-height: 49px;
+    text-align: center;
+    width: 20%;
+  }
+}
+
 // footer
 footer {
   background: #eee;
@@ -438,9 +470,9 @@ footer {
 
   // record controls
   .recording {
-    margin-left: 37%;
-    text-align: left;
-    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    width: 320px;
     div {
       display: inline-block;
     }
@@ -478,18 +510,6 @@ footer {
       background-color: #fff;
       color: #00B900;
     }
-    audio {
-      float: left;
-      margin-top: 10px;
-      width: 45px;
-    }
-    a {
-      background: #868686;
-      color: #fff;
-      float: right;
-      line-height: 50px;
-      padding: 0 10px;
-    }
     .record-time {
       background: #9A9A9A;
       color: #fff;
@@ -498,14 +518,7 @@ footer {
       line-height: 50px;
       margin-left: -4px;
       text-align: center;
-      width: 60px;
-    }
-    div:nth-of-type(n+5) {
-      height: 50px;
-      background: #1C1C1C;
-      margin: 0 4px 0 0;
-      vertical-align: middle;
-      width: 142px;
+      width: 80px;
     }
   }
 

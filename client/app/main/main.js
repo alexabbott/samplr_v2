@@ -570,7 +570,7 @@ $(window).load(function(){
       hf.innerHTML = "Download";
       div.appendChild(au);
       div.appendChild(hf);
-      document.getElementsByClassName('recording')[0].appendChild(div);
+      document.getElementsByClassName('tracks')[0].appendChild(div);
     });
   }
 
@@ -646,7 +646,7 @@ $(window).load(function(){
 
   // play all recordings
   function playAll() {
-    var sounds = document.querySelectorAll('.recording audio');
+    var sounds = document.querySelectorAll('.tracks audio');
     for (var s = 0; s < sounds.length; s++) {
       sounds[s].play();
     }
@@ -654,7 +654,7 @@ $(window).load(function(){
 
   // stop all recordings
   function stopAll() {
-    var sounds = document.querySelectorAll('.recording audio');
+    var sounds = document.querySelectorAll('.tracks audio');
     for (var s = 0; s < sounds.length; s++) {
       sounds[s].pause();
       sounds[s].currentTime = 0;
