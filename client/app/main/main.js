@@ -644,6 +644,23 @@ $(window).load(function(){
     }
   }
 
+  // play all recordings
+  function playAll() {
+    var sounds = document.querySelectorAll('.recording audio');
+    for (var s = 0; s < sounds.length; s++) {
+      sounds[s].play();
+    }
+  }
+
+  // stop all recordings
+  function stopAll() {
+    var sounds = document.querySelectorAll('.recording audio');
+    for (var s = 0; s < sounds.length; s++) {
+      sounds[s].pause();
+      sounds[s].currentTime = 0;
+    }
+  }
+
   // Metronome functions
   function fixOscillator(osc) {
     if (typeof osc.start == 'undefined') {

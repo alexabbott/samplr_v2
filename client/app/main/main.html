@@ -354,6 +354,7 @@
   <div class="recording">
     <div class="record">record</div>
     <div class="stop">stop</div>
+    <div class="play">play</div>
     <div class="record-time">0 s</div>
   </div>
   <div class="support">?</div>
@@ -387,6 +388,13 @@
       recordTime += 0.1;
       $('.record-time').text((Math.round(recordTime * 10) /10) + ' s');
     }, 100);
+    playAll();
+    clearInterval($t);
+    $newbpm = 1000/$('.met').val()*60;
+    $t = setInterval(beep,$newbpm);
+    metOn = true;
+    $('.met-bpm').removeClass('hidden');
+    $('.met-image').attr('src','../../assets/images/metronome-on.png');
   });
 
   // stop recording
@@ -394,6 +402,12 @@
     stopRecording();
     $('.record').removeClass('record-on');
     clearInterval(displayTime);
+    stopAll();
+  });
+
+  // play all samples
+  $('.play').on('click', function() {
+    playAll();
   });
 
   $('.start-met').click(function() {

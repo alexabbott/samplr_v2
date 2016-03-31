@@ -464,6 +464,16 @@ footer {
       text-align: center;
       width: 80px;
     }
+    .play {
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      margin-left: -4px;
+      text-align: center;
+      width: 80px;
+    }
     .record-on {
       background-color: #fff;
       color: #00B900;
@@ -490,7 +500,7 @@ footer {
       text-align: center;
       width: 60px;
     }
-    div:nth-of-type(n+4) {
+    div:nth-of-type(n+5) {
       height: 50px;
       background: #1C1C1C;
       margin: 0 4px 0 0;
