@@ -51,7 +51,10 @@ $(window).load(function(){
   myAudio,
   source = [],
   recordNode,
-  delayNodes,
+  convolverNodes = [],
+  convolverDry = [],
+  convolverWet = [],
+  convolvers = [],
   gainNodes = [],
   panNodes = [],
   pans = [],
@@ -234,30 +237,125 @@ $(window).load(function(){
       this.parentNode.querySelector('.loop').style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'none';
       this.parentNode.querySelector('.pan').style.display = 'none';
+      this.parentNode.querySelector('.reverb').style.display = 'none';
     } else if (this.value == 'filter') {
       this.parentNode.querySelector('.gain').style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'block';
       this.parentNode.querySelector('.loop').style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'none';
       this.parentNode.querySelector('.pan').style.display = 'none';
+      this.parentNode.querySelector('.reverb').style.display = 'none';
     } else if (this.value == 'loop') {
       this.parentNode.querySelector('.gain').style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'none';
       this.parentNode.querySelector('.loop').style.display = 'block';
       this.parentNode.querySelector('.stretch').style.display = 'none';
       this.parentNode.querySelector('.pan').style.display = 'none';
+      this.parentNode.querySelector('.reverb').style.display = 'none';
     } else if (this.value == 'stretch') {
       this.parentNode.querySelector('.gain').style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'none';
       this.parentNode.querySelector('.loop').style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'block';
       this.parentNode.querySelector('.pan').style.display = 'none';
+      this.parentNode.querySelector('.reverb').style.display = 'none';
     } else if (this.value == 'pan') {
       this.parentNode.querySelector('.gain').style.display = 'none';
       this.parentNode.querySelector('.filter').style.display = 'none';
       this.parentNode.querySelector('.loop').style.display = 'none';
       this.parentNode.querySelector('.stretch').style.display = 'none';
       this.parentNode.querySelector('.pan').style.display = 'block';
+      this.parentNode.querySelector('.pan').style.display = 'none';
+    } else if (this.value == 'reverb') {
+      this.parentNode.querySelector('.gain').style.display = 'none';
+      this.parentNode.querySelector('.filter').style.display = 'none';
+      this.parentNode.querySelector('.loop').style.display = 'none';
+      this.parentNode.querySelector('.stretch').style.display = 'none';
+      this.parentNode.querySelector('.pan').style.display = 'none';
+      this.parentNode.querySelector('.reverb').style.display = 'block';
+    }
+  }
+
+  // recorderjs logic
+  function startUserMedia() {
+    var input = recordNode;
+    recorder = new Recorder(input);
+  }
+
+  function startRecording() {
+    recorder && recorder.record();
+  }
+
+  function stopRecording() {
+    recorder && recorder.stop();
+
+    // create WAV download link using audio data blob
+    createDownloadLink();
+
+    recorder.clear();
+  }
+
+  function setRecordNode() {
+    recordNode = audioCtx.createGain();
+  }
+
+  function createDownloadLink() {
+    recorder && recorder.exportWAV(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var div = document.createElement('div');
+      var au = document.createElement('audio');
+      var hf = document.createElement('a');
+
+      au.controls = true;
+      au.src = url;
+      hf.href = url;
+      hf.download = new Date().toISOString() + '.wav';
+      hf.innerHTML = "Download";
+      div.appendChild(au);
+      div.appendChild(hf);
+      document.getElementsByClassName('tracks')[0].appendChild(div);
+    });
+  }
+
+  // grab all audio elements
+  function setAudio() {
+    myAudio = document.querySelectorAll('audio');
+  }
+
+  // set audio elements as web audio api source nodes
+  function setSources() {
+    source = [
+    audioCtx.createMediaElementSource(myAudio[0]),
+    audioCtx.createMediaElementSource(myAudio[1]),
+    audioCtx.createMediaElementSource(myAudio[2]),
+    audioCtx.createMediaElementSource(myAudio[3]),
+    audioCtx.createMediaElementSource(myAudio[4]),
+    audioCtx.createMediaElementSource(myAudio[5]),
+    audioCtx.createMediaElementSource(myAudio[6]),
+    audioCtx.createMediaElementSource(myAudio[7]),
+    audioCtx.createMediaElementSource(myAudio[8]),
+    audioCtx.createMediaElementSource(myAudio[9]),
+    audioCtx.createMediaElementSource(myAudio[10]),
+    audioCtx.createMediaElementSource(myAudio[11]),
+    audioCtx.createMediaElementSource(myAudio[12]),
+    audioCtx.createMediaElementSource(myAudio[13]),
+    audioCtx.createMediaElementSource(myAudio[14]),
+    audioCtx.createMediaElementSource(myAudio[15])
+    ];
+  }
+
+  // reset a single source when switching individual samples
+  function setSingleSource(n) {
+    source[n] = audioCtx.createMediaElementSource(myAudio[n]);
+  }
+
+  // all effects stuff starts here
+
+  function grabEffects() {
+    var effects = document.querySelectorAll('.effects');
+    for (var e = 0; e < 16; e++) {
+      var element = effects[e];
+      element.addEventListener('change', changeEffects);
     }
   }
 
@@ -288,110 +386,40 @@ $(window).load(function(){
     clearInterval(interval[i]);
   }
 
-  function stretchIt () {
-    $('.stretch').on('input', function() {
-      $('.sample-player')[stretches.indexOf(this)].playbackRate = $(stretches[stretches.indexOf(this)]).val();
-    });
-  }
-
-  function gainIt() {
-    $('.gain').on('input', function() {
-      $('.sample-player')[gains.indexOf(this)].volume = $(gains[gains.indexOf(this)]).val();
-    });
-  }
-
-  function panIt() {
-    $('.pan').on('input', function() {
-      panNodes[pans.indexOf(this)].pan.value = $(pans[pans.indexOf(this)]).val();
-    });
-  }
-
-  function filterIt() {
-    $('.filter').on('input', function() {
-      filterNodes[filters.indexOf(this)].frequency.value = $(filters[filters.indexOf(this)]).val();
-    });
-  }
-
   function grabLoops() {
     for (var l = 0; l < document.querySelectorAll('.loop').length; l++) {
       loops.push(document.querySelectorAll('.loop')[l]);
     }
   }
 
-  function grabEffects() {
-    var effects = document.querySelectorAll('.effects');
-    for (var e = 0; e < 16; e++) {
-      var element = effects[e];
-      element.addEventListener('change', changeEffects);
+  function setRateValues() {
+    for (var n=0;n<16;n++) {
+      stretches.push(document.querySelectorAll('.stretch')[n]);
     }
   }
 
-  // recorderjs logic
-  function startUserMedia() {
-    var input = recordNode;
-    recorder = new Recorder(input);
-  }
-
-  function startRecording() {
-    recorder && recorder.record();
-  }
-
-  function stopRecording() {
-    recorder && recorder.stop();
-
-    // create WAV download link using audio data blob
-    createDownloadLink();
-
-    recorder.clear();
-  }
-
-  function createDownloadLink() {
-    recorder && recorder.exportWAV(function(blob) {
-      var url = URL.createObjectURL(blob);
-      var div = document.createElement('div');
-      var au = document.createElement('audio');
-      var hf = document.createElement('a');
-
-      au.controls = true;
-      au.src = url;
-      hf.href = url;
-      hf.download = new Date().toISOString() + '.wav';
-      hf.innerHTML = "Download";
-      div.appendChild(au);
-      div.appendChild(hf);
-      document.getElementsByClassName('tracks')[0].appendChild(div);
+  function stretchIt () {
+    $('.stretch').on('input', function() {
+      $('.sample-player')[stretches.indexOf(this)].playbackRate = $(stretches[stretches.indexOf(this)]).val();
     });
-  }
-
-  function setSources() {
-    source = [
-    audioCtx.createMediaElementSource(myAudio[0]),
-    audioCtx.createMediaElementSource(myAudio[1]),
-    audioCtx.createMediaElementSource(myAudio[2]),
-    audioCtx.createMediaElementSource(myAudio[3]),
-    audioCtx.createMediaElementSource(myAudio[4]),
-    audioCtx.createMediaElementSource(myAudio[5]),
-    audioCtx.createMediaElementSource(myAudio[6]),
-    audioCtx.createMediaElementSource(myAudio[7]),
-    audioCtx.createMediaElementSource(myAudio[8]),
-    audioCtx.createMediaElementSource(myAudio[9]),
-    audioCtx.createMediaElementSource(myAudio[10]),
-    audioCtx.createMediaElementSource(myAudio[11]),
-    audioCtx.createMediaElementSource(myAudio[12]),
-    audioCtx.createMediaElementSource(myAudio[13]),
-    audioCtx.createMediaElementSource(myAudio[14]),
-    audioCtx.createMediaElementSource(myAudio[15])
-    ];
-  }
-
-  function setSingleSource(n) {
-    source[n] = audioCtx.createMediaElementSource(myAudio[n]);
   }
 
   function setGainNodes() {
     for (var g = 0; g<16; g++) {
       gainNodes.push(audioCtx.createGain());
     }
+  }
+
+  function setGainValues() {
+    for (var n=0;n<16;n++) {
+      gains.push(document.querySelectorAll('.gain')[n]);
+    }
+  }
+
+  function gainIt() {
+    $('.gain').on('input', function() {
+      $('.sample-player')[gains.indexOf(this)].volume = $(gains[gains.indexOf(this)]).val();
+    });
   }
 
   function setPanNodes() {
@@ -405,6 +433,53 @@ $(window).load(function(){
       pans.push(document.querySelectorAll('.pan')[n]);
       panNodes[n].pan.value = $(pans[n]).val();
     }
+  }
+
+  function panIt() {
+    $('.pan').on('input', function() {
+      panNodes[pans.indexOf(this)].pan.value = $(pans[pans.indexOf(this)]).val();
+    });
+  }
+
+  // load reverb impulse and connect it to convolveNodes buffer
+  var loadImpulse = function () {
+    var url = "http://files.andre-michelle.com/impulse/factory.hall.wav";
+    var request = new XMLHttpRequest();
+    request.open( "GET", url, true );
+    request.responseType = "arraybuffer";
+    request.onload = function () {
+      audioCtx.decodeAudioData( request.response, function ( buffer ) {
+        for (var n = 0; n<16; n++) {
+          convolverNodes[n].buffer = buffer;
+        }
+      }, function ( e ) { console.log( e ); } );
+    };request.onerror = function ( e ) {
+      console.log( e );
+    };
+    request.send();
+  };
+
+  function setConvolverNodes() {
+    for (var f = 0; f<16; f++) {
+      convolverNodes.push(audioCtx.createConvolver());
+      convolverDry.push(audioCtx.createGain());
+      convolverWet.push(audioCtx.createGain());
+    }
+  }
+
+  function setConvolverValues() {
+    for (var n=0;n<16;n++) {
+      convolvers.push(document.querySelectorAll('.reverb')[n]);
+      convolverDry[n].gain.value = (1.0 - $(convolvers[n]).val());
+      convolverWet[n].gain.value = $(convolvers[n]).val();
+    }
+  }
+
+  function convolveIt() {
+    $('.reverb').on('input', function() {
+      convolverDry[convolvers.indexOf(this)].gain.value = ( 1.0 - $(convolvers[convolvers.indexOf(this)]).val() );
+      convolverWet[convolvers.indexOf(this)].gain.value = $(convolvers[convolvers.indexOf(this)]).val();
+    });
   }
 
   function setFilterNodes() {
@@ -422,33 +497,26 @@ $(window).load(function(){
     }
   }
 
+  function filterIt() {
+    $('.filter').on('input', function() {
+      filterNodes[filters.indexOf(this)].frequency.value = $(filters[filters.indexOf(this)]).val();
+    });
+  }
+
   function setDestinations() {
     // connect the AudioBufferSourceNode to the gainNode
     // and the gainNode to the destination, so we can play the
     // music and adjust the volume using the mouse cursor
     for (var d = 0; d<16; d++) {
+
+      // for reverb
+      source[d].connect(convolverNodes[d])
+      convolverNodes[d].connect(convolverWet[d]);
+      source[d].connect(convolverDry[d]);
+      convolverDry[d].connect(gainNodes[d]);
+      convolverWet[d].connect(gainNodes[d]);
+
       source[d].connect(filterNodes[d]).connect(gainNodes[d]).connect(panNodes[d]).connect(recordNode).connect(audioCtx.destination);
-    }
-  }
-
-  function setRecordNode() {
-    recordNode = audioCtx.createGain();
-  }
-
-  function setAudio() {
-    myAudio = document.querySelectorAll('audio');
-  }
-
-
-  function setGainValues() {
-    for (var n=0;n<16;n++) {
-      gains.push(document.querySelectorAll('.gain')[n]);
-    }
-  }
-
-  function setRateValues() {
-    for (var n=0;n<16;n++) {
-      stretches.push(document.querySelectorAll('.stretch')[n]);
     }
   }
 
@@ -521,8 +589,6 @@ $(window).load(function(){
     amp.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.11);
   }
 
-
-
   // Initiate Web Audio API and call functions //
   setTimeout(function () {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -539,6 +605,11 @@ $(window).load(function(){
     // grab all loop inputs
     createLoopStates();
     grabLoops();
+
+    loadImpulse();
+    setConvolverNodes();
+    setConvolverValues();
+    convolveIt();
 
     // Set volume for all sources
     setGainNodes();
