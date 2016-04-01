@@ -443,7 +443,7 @@ $(window).load(function(){
 
   // load reverb impulse and connect it to convolveNodes buffer
   var loadImpulse = function () {
-    var url = "http://files.andre-michelle.com/impulse/factory.hall.wav";
+    var url = "http://samplerv2.s3.amazonaws.com/factory.hall.wav";
     var request = new XMLHttpRequest();
     request.open( "GET", url, true );
     request.responseType = "arraybuffer";
