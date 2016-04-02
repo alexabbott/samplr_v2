@@ -23,6 +23,7 @@ angular.module('meanAppApp')
       if($scope.newThing === '') {
         return;
       }
+
       $scope.newThingUrl = fileURL;
       $scope.newThingAuthor = thisAuthor;
       $http.post('/api/things', { name: $scope.newThing, info: $scope.newThingInfo, url: $scope.newThingUrl, author: $scope.newThingAuthor });
@@ -41,6 +42,15 @@ angular.module('meanAppApp')
         alert('Your kit must have a name');
         return false;
       }
+      var kitNames = document.querySelectorAll('.kit-name');
+      var kitNamesLength = kitNames.length;
+      for (var k = 0; k < kitNamesLength; k++) {
+        if ($scope.newKit.toLowerCase() === kitNames[k].innerHTML.toLowerCase()) {
+          alert('That kit name is already taken. Please use a unique kit name');
+          return false;
+        }
+      }
+
       $http.post('/api/kits', { name: $scope.newKit, author: $scope.newKitAuthor, sample1name: $scope.newKitSample1Name, sample1info: $scope.newKitSample1Info, sample1url: $scope.newKitSample1Url, sample2name: $scope.newKitSample2Name, sample2info: $scope.newKitSample2Info, sample2url: $scope.newKitSample2Url, sample3name: $scope.newKitSample3Name, sample3info: $scope.newKitSample3Info, sample3url: $scope.newKitSample3Url, sample4name: $scope.newKitSample4Name, sample4info: $scope.newKitSample4Info, sample4url: $scope.newKitSample4Url, sample5name: $scope.newKitSample5Name, sample5info: $scope.newKitSample5Info, sample5url: $scope.newKitSample5Url, sample6name: $scope.newKitSample6Name, sample6info: $scope.newKitSample6Info, sample6url: $scope.newKitSample6Url, sample7name: $scope.newKitSample7Name, sample7info: $scope.newKitSample7Info, sample7url: $scope.newKitSample7Url, sample8name: $scope.newKitSample8Name, sample8info: $scope.newKitSample8Info, sample8url: $scope.newKitSample8Url, sample9name: $scope.newKitSample9Name, sample9info: $scope.newKitSample9Info, sample9url: $scope.newKitSample9Url, sample10name: $scope.newKitSample10Name, sample10info: $scope.newKitSample10Info, sample10url: $scope.newKitSample10Url, sample11name: $scope.newKitSample11Name, sample11info: $scope.newKitSample11Info, sample11url: $scope.newKitSample11Url, sample12name: $scope.newKitSample12Name, sample12info: $scope.newKitSample12Info, sample12url: $scope.newKitSample12Url, sample13name: $scope.newKitSample13Name, sample13info: $scope.newKitSample13Info, sample13url: $scope.newKitSample13Url, sample14name: $scope.newKitSample14Name, sample14info: $scope.newKitSample14Info, sample14url: $scope.newKitSample14Url, sample15name: $scope.newKitSample15Name, sample15info: $scope.newKitSample15Info, sample15url: $scope.newKitSample15Url, sample16name: $scope.newKitSample16Name, sample16info: $scope.newKitSample16Info, sample16url: $scope.newKitSample16Url });
       $scope.newKitAuthor = '';
       $scope.newKitSample1Name = '';
@@ -139,6 +149,14 @@ angular.module('meanAppApp')
         if (!$scope.newThingInfo) {
           alert('You must choose a category for your sample');
           return false;
+        }
+        var names = document.querySelectorAll('.sample-name');
+        var namesLength = names.length;
+        for (var n = 0; n < namesLength; n++) {
+          if ($scope.newThing.toLowerCase() === names[n].innerHTML.toLowerCase()) {
+            alert('That sample name is already taken. Please use a unique sample name');
+            return false;
+          }
         }
         // Prepend Unique String To Prevent Overwrites
         var uniqueFileName = $scope.uniqueString() + '-' + $scope.file.name;
