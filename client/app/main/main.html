@@ -356,9 +356,9 @@
     </div>
   </div>
   <div class="recording">
-    <div class="record">record</div>
-    <div class="stop">stop</div>
-    <div class="play">play</div>
+    <div class="record"><img src="../../assets/images/record.svg"></div>
+    <div class="stop"><img src="../../assets/images/stop.svg"></div>
+    <div class="play"><img src="../../assets/images/play.svg"></div>
     <div class="record-time">0 s</div>
   </div>
   <div class="support">?</div>
@@ -387,6 +387,7 @@
     startUserMedia();
     startRecording();
     $(this).addClass('record-on');
+    $('.record img').attr('src','../../assets/images/record-white.svg');
     recordTime = 0;
     displayTime = setInterval(function () {
       recordTime += 0.1;
@@ -405,8 +406,13 @@
   $('.stop').on('click', function() {
     stopRecording();
     $('.record').removeClass('record-on');
+    $('.record img').attr('src','../../assets/images/record.svg');
     clearInterval(displayTime);
     stopAll();
+    clearInterval($t);
+    metOn = false;
+    $('.met-bpm').addClass('hidden');
+    $('.met-image').attr('src', '../../assets/images/metronome.png');
   });
 
   // play all samples
@@ -430,10 +436,20 @@
     }
   });
 
-  $('body').on('click', '.remove-track', function(){
-    $(this).parent().remove();
+  // mute track
+  $('body').on('click', '.mute-track', function(){
+
+    var volIcon = document.querySelectorAll('.mute-track img')[$(this).parent().index()];
+    if (volIcon.getAttribute('src') == '../../assets/images/volume.svg') {
+      volIcon.setAttribute('src','../../assets/images/mute.svg');
+    } else if (volIcon.getAttribute('src') == '../../assets/images/mute.svg') {
+      volIcon.setAttribute('src','../../assets/images/volume.svg');
+    }
+    wavesurfer[$(this).parent().index()].toggleMute();
+
   });
 
+  // change metronome bpm when changing input value
   $('.met').on('input', function(){
     clearInterval($t);
     $newbpm = 1000/$('.met').val()*60;

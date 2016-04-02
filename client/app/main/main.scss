@@ -405,7 +405,7 @@ body {
     height: 50px;
     vertical-align: middle;
     width: 100%;
-    .remove-track {
+    .mute-track {
       background: #ff0000;
       color: #fff;
       cursor: pointer;
@@ -418,16 +418,15 @@ body {
       transition: 0.2s ease-out;
       transition-property: background, color;
       width: 5%;
-      &:hover {
-        background: #fff;
-        color: #ff0000;
+      img {
+        width: 20px;
       }
     }
     audio {
       float: left;
       height: 50px;
       margin-top: -10px;
-      width: 75%;
+      width: 0;
     }
     a {
       background: #868686;
@@ -436,7 +435,17 @@ body {
       height: 49px;
       line-height: 49px;
       text-align: center;
-      width: 20%;
+      width: 5%;
+      img {
+        width: 20px;
+      }
+    }
+    .wave-holder {
+      display: inline-block;
+      width: 90%;
+    }
+    .wave {
+      width: 100%;
     }
   }
 }
@@ -494,7 +503,8 @@ footer {
       display: inline-block;
     }
     .record {
-      background: #00B900;
+      background: #DDDDDD;
+      border-left: 1px solid #EEEEEE;
       color: #fff;
       cursor: pointer;
       height: 50px;
@@ -502,9 +512,13 @@ footer {
       text-align: center;
       transition: background-color 0.2s ease-out;
       width: 80px;
+      img {
+        width: 35px;
+      }
     }
     .stop {
-      background-color: #ff0000;
+      background-color: #DDDDDD;
+      border-left: 1px solid #EEEEEE;
       color: #fff;
       cursor: pointer;
       height: 50px;
@@ -512,9 +526,13 @@ footer {
       margin-left: -4px;
       text-align: center;
       width: 80px;
+      img {
+        width: 27px;
+      }
     }
     .play {
-      background-color: #000;
+      background-color: #DDDDDD;
+      border-left: 1px solid #EEEEEE;
       color: #fff;
       cursor: pointer;
       height: 50px;
@@ -522,13 +540,15 @@ footer {
       margin-left: -4px;
       text-align: center;
       width: 80px;
+      img {
+        width: 25px;
+      }
     }
     .record-on {
-      background-color: #fff;
-      color: #00B900;
+      background-color: #ff0000;
     }
     .record-time {
-      background: #9A9A9A;
+      background: #999999;
       color: #fff;
       display: inline-block;
       height: 50px;

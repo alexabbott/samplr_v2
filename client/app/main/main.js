@@ -67,9 +67,12 @@ $(window).load(function(){
   sampleurls = [],
   down = {},
   fileURL,
-  thisAuthor;
+  thisAuthor,
+  wavesurfer = [],
+  waveTracks = 0;
 
   keysActive = true;
+
 
 // MAIN FUNCTIONS //
 
@@ -307,30 +310,41 @@ $(window).load(function(){
   function createDownloadLink() {
     recorder && recorder.exportWAV(function(blob) {
       var url = URL.createObjectURL(blob);
+      var waveHolder = document.createElement('div');
+      waveHolder.setAttribute('class', 'wave-holder');
+      var wave = document.createElement('div');
+      wave.setAttribute('class', 'wave' + waveTracks);
+      $(wave).addClass('wave');
       var div = document.createElement('div');
       div.className = 'track-holder';
       var au = document.createElement('audio');
       var hf = document.createElement('a');
-      var remove = document.createElement('div');
-      remove.className = 'remove-track';
-      remove.innerHTML = "&times;";
+      var mute = document.createElement('div');
+      mute.className = 'mute-track';
+      mute.innerHTML = "<img src='../../assets/images/volume.svg'>";
 
       au.controls = true;
       au.src = url;
       hf.href = url;
       hf.download = new Date().toISOString() + '.wav';
-      hf.innerHTML = "Download";
-      div.appendChild(remove);
+      hf.innerHTML = "<img src='../../assets/images/download.svg'>";
+      waveHolder.appendChild(wave);
+      div.appendChild(mute);
       div.appendChild(au);
+      div.appendChild(waveHolder);
       div.appendChild(hf);
+
+      // remove track if it has no data
       div.style.display = 'none';
       document.getElementsByClassName('tracks')[0].appendChild(div);
       setTimeout(function(){
         if (isNaN(document.getElementsByClassName('tracks')[0].lastChild.querySelector('audio').duration)) {
-          document.getElementsByClassName('tracks')[0].removeChild(div)
+          document.getElementsByClassName('tracks')[0].removeChild(div);
         } else {
           div.style.display = 'block';
         }
+
+        // add margin to bottom of main sample area to prevent tracks from preventing interaction with buttons
         if (document.querySelectorAll('.track-holder').length == 1) {
           $('.sample-bank').css('margin-bottom','200px');
         } else if (document.querySelectorAll('.track-holder').length == 2) {
@@ -338,8 +352,41 @@ $(window).load(function(){
         } else if (document.querySelectorAll('.track-holder').length == 3) {
           $('.sample-bank').css('margin-bottom','300px');
         }
-      },50);
+
+        var cont = '.wave' + waveTracks;
+
+        wavesurfer[waveTracks] = WaveSurfer.create({
+          container: cont,
+          waveColor: '#EEEEEE',
+          progressColor: '#BBBBBB',
+          cursorColor: '#FFFFFF',
+          height: 49
+        });
+        wavesurfer[waveTracks].load(url);
+        waveTracks++;
+
+      },100);
     });
+  }
+
+  // play all recordings
+  function playAll() {
+    var waves = document.querySelectorAll('.wave');
+    if (document.querySelector('.wave')) {
+      for (var w = 0; w < waves.length; w++) {
+        wavesurfer[(w)].play();
+      }
+    }
+  }
+
+  // stop all recordings
+  function stopAll() {
+    var waves = document.querySelectorAll('.wave');
+    if (document.querySelector('.wave')) {
+      for (var w = 0; w < waves.length; w++) {
+        wavesurfer[w].stop();
+      }
+    }
   }
 
   // grab all audio elements
@@ -544,23 +591,6 @@ $(window).load(function(){
       convolverWet[d].connect(gainNodes[d]);
 
       source[d].connect(filterNodes[d]).connect(gainNodes[d]).connect(panNodes[d]).connect(recordNode).connect(audioCtx.destination);
-    }
-  }
-
-  // play all recordings
-  function playAll() {
-    var sounds = document.querySelectorAll('.tracks audio');
-    for (var s = 0; s < sounds.length; s++) {
-      sounds[s].play();
-    }
-  }
-
-  // stop all recordings
-  function stopAll() {
-    var sounds = document.querySelectorAll('.tracks audio');
-    for (var s = 0; s < sounds.length; s++) {
-      sounds[s].pause();
-      sounds[s].currentTime = 0;
     }
   }
 
