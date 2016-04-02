@@ -397,30 +397,47 @@ body {
   bottom: 50px;
   max-height: 150px;
   overflow: scroll;
-  padding-right: 30px;
   position: fixed;
   width: 100%;
-  div {
+  .track-holder {
     background: #1C1C1C;
     border-top: 1px solid #f1f1f1;
     height: 50px;
     vertical-align: middle;
     width: 100%;
-  }
-  audio {
-    float: left;
-    height: 50px;
-    margin-top: -10px;
-    width: 80%;
-  }
-  a {
-    background: #868686;
-    color: #fff;
-    float: right;
-    height: 49px;
-    line-height: 49px;
-    text-align: center;
-    width: 20%;
+    .remove-track {
+      background: #ff0000;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      float: left;
+      font-size: 1.5em;
+      height: 49px;
+      line-height: 49px;
+      text-align: center;
+      transition: 0.2s ease-out;
+      transition-property: background, color;
+      width: 5%;
+      &:hover {
+        background: #fff;
+        color: #ff0000;
+      }
+    }
+    audio {
+      float: left;
+      height: 50px;
+      margin-top: -10px;
+      width: 75%;
+    }
+    a {
+      background: #868686;
+      color: #fff;
+      float: right;
+      height: 49px;
+      line-height: 49px;
+      text-align: center;
+      width: 20%;
+    }
   }
 }
 

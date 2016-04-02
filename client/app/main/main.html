@@ -431,6 +431,10 @@
     }
   });
 
+  $('body').on('click', '.remove-track', function(){
+    $(this).parent().remove();
+  });
+
   $('.met').on('input', function(){
     clearInterval($t);
     $newbpm = 1000/$('.met').val()*60;
@@ -583,6 +587,7 @@
 
   // play samples on click
   $('body').on('mousedown touchstart','.sample', function(){
+    gainNodes[$(this).index()].gain.value = 1;
     $(this).find('.sample-player')[0].pause();
     $(this).find('.sample-player')[0].currentTime = 0;
     $(this).find('.sample-player')[0].play();

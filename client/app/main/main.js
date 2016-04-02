@@ -93,6 +93,11 @@ $(window).load(function(){
     var audio = $('.sample-player')[sample];
     $(audio).parent().parent().removeClass('selected');
     gainNodes[sample].gain.value = 0;
+    if (loopOn[sample] == false) {
+      loopOn[sample] = true;
+      clearLoop(sample);
+    }
+    document.querySelectorAll('.loop')[sample].classList.remove('looping');
     setTimeout(function(){
       audio.pause();
     },100);
@@ -303,17 +308,37 @@ $(window).load(function(){
     recorder && recorder.exportWAV(function(blob) {
       var url = URL.createObjectURL(blob);
       var div = document.createElement('div');
+      div.className = 'track-holder';
       var au = document.createElement('audio');
       var hf = document.createElement('a');
+      var remove = document.createElement('div');
+      remove.className = 'remove-track';
+      remove.innerHTML = "&times;";
 
       au.controls = true;
       au.src = url;
       hf.href = url;
       hf.download = new Date().toISOString() + '.wav';
       hf.innerHTML = "Download";
+      div.appendChild(remove);
       div.appendChild(au);
       div.appendChild(hf);
+      div.style.display = 'none';
       document.getElementsByClassName('tracks')[0].appendChild(div);
+      setTimeout(function(){
+        if (isNaN(document.getElementsByClassName('tracks')[0].lastChild.querySelector('audio').duration)) {
+          document.getElementsByClassName('tracks')[0].removeChild(div)
+        } else {
+          div.style.display = 'block';
+        }
+        if (document.querySelectorAll('.track-holder').length == 1) {
+          $('.sample-bank').css('margin-bottom','200px');
+        } else if (document.querySelectorAll('.track-holder').length == 2) {
+          $('.sample-bank').css('margin-bottom','250px');
+        } else if (document.querySelectorAll('.track-holder').length == 3) {
+          $('.sample-bank').css('margin-bottom','300px');
+        }
+      },50);
     });
   }
 
@@ -374,9 +399,11 @@ $(window).load(function(){
         myAudio[i].currentTime = 0;
         myAudio[i].play();
       }, document.querySelectorAll('.loop')[i].value);
+      console.log(interval[i]);
       loopOn[i] = false;
     } else {
       clearInterval(interval[i]);
+      console.log(interval[i]);
       loopOn[i] = true;
     }
   }
