@@ -360,7 +360,8 @@ $(window).load(function(){
           waveColor: '#EEEEEE',
           progressColor: '#BBBBBB',
           cursorColor: '#FFFFFF',
-          height: 49
+          height: 49,
+          fillParent: false
         });
         wavesurfer[waveTracks].load(url);
         waveTracks++;
@@ -642,7 +643,7 @@ $(window).load(function(){
     amp.gain.cancelScheduledValues(now);
     // Anchor beginning of ramp at current value.
     amp.gain.setValueAtTime(amp.gain.value, now);
-    amp.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.01);
+    amp.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01);
     amp.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.11);
   }
 
