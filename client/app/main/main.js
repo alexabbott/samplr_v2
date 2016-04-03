@@ -8,6 +8,24 @@ angular.module('meanAppApp')
   });
 });
 
+angular.module('meanAppApp')
+.filter('kicks', function() {
+
+  return function(input) {
+
+    var output;
+
+    // Do filter work here
+    if (input.info === 'Kick') {
+      output = input;
+    }
+
+    return output;
+
+  }
+
+});
+
 var directives = angular.module('directives', []);
 
 directives.directive('file', function() {
