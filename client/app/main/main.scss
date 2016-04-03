@@ -417,10 +417,15 @@ body {
       text-align: center;
       transition: 0.2s ease-out;
       transition-property: background, color;
-      width: 5%;
+      width: 15%;
       img {
         width: 20px;
       }
+    }
+    input {
+      float: right;
+      margin: 22px 10px 0 0;
+      width: 78%;
     }
     audio {
       float: left;
@@ -442,7 +447,7 @@ body {
     }
     .wave-holder {
       display: inline-block;
-      width: 90%;
+      width: 80%;
     }
     .wave {
       width: auto;

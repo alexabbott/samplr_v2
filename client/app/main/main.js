@@ -8,24 +8,6 @@ angular.module('meanAppApp')
   });
 });
 
-angular.module('meanAppApp')
-.filter('kicks', function() {
-
-  return function(input) {
-
-    var output;
-
-    // Do filter work here
-    if (input.info === 'Kick') {
-      output = input;
-    }
-
-    return output;
-
-  }
-
-});
-
 var directives = angular.module('directives', []);
 
 directives.directive('file', function() {
@@ -87,7 +69,8 @@ $(window).load(function(){
   fileURL,
   thisAuthor,
   wavesurfer = [],
-  waveTracks = 0;
+  waveTracks = 0,
+  tracksVol = [];
 
   keysActive = true;
 
@@ -335,6 +318,13 @@ $(window).load(function(){
       $(wave).addClass('wave');
       var div = document.createElement('div');
       div.className = 'track-holder';
+      var vol = document.createElement('input');
+      vol.setAttribute('type','range');
+      vol.setAttribute('class','volume');
+      vol.setAttribute('value','1');
+      vol.setAttribute('min','0');
+      vol.setAttribute('max','1');
+      vol.setAttribute('step','0.01');
       var au = document.createElement('audio');
       var hf = document.createElement('a');
       var mute = document.createElement('div');
@@ -347,6 +337,7 @@ $(window).load(function(){
       hf.download = new Date().toISOString() + '.wav';
       hf.innerHTML = "<img src='../../assets/images/download.svg'>";
       waveHolder.appendChild(wave);
+      mute.appendChild(vol);
       div.appendChild(mute);
       div.appendChild(au);
       div.appendChild(waveHolder);
@@ -386,6 +377,8 @@ $(window).load(function(){
         waveTracks++;
 
       },100);
+      setVolValues();
+      setTrackVolume();
     });
   }
 
@@ -416,6 +409,20 @@ $(window).load(function(){
         wavesurfer[w].stop();
       }
     }
+  }
+
+  function setVolValues() {
+    tracksVol = [];
+    var trackList = document.querySelectorAll('.track-holder');
+    for (var n=0;n<trackList.length;n++) {
+      tracksVol.push(document.querySelectorAll('.volume')[n]);
+    }
+  }
+
+  function setTrackVolume() {
+    $('.volume').on('input', function() {
+      $('.tracks audio')[tracksVol.indexOf(this)].volume = $(tracksVol[tracksVol.indexOf(this)]).val();
+    });
   }
 
   // grab all audio elements
