@@ -364,6 +364,7 @@ $(window).load(function(){
           fillParent: false
         });
         wavesurfer[waveTracks].load(url);
+        wavesurfer[waveTracks].toggleMute();
         waveTracks++;
 
       },100);
@@ -372,16 +373,25 @@ $(window).load(function(){
 
   // play all recordings
   function playAll() {
+    var sounds = document.querySelectorAll('.tracks audio');
+    for (var s = 0; s < sounds.length; s++) {
+      sounds[s].play();
+    }
     var waves = document.querySelectorAll('.wave');
     if (document.querySelector('.wave')) {
       for (var w = 0; w < waves.length; w++) {
-        wavesurfer[(w)].play();
+        wavesurfer[w].play();
       }
     }
   }
 
   // stop all recordings
   function stopAll() {
+    var sounds = document.querySelectorAll('.tracks audio');
+    for (var s = 0; s < sounds.length; s++) {
+      sounds[s].currentTime = 0;
+      sounds[s].pause();
+    }
     var waves = document.querySelectorAll('.wave');
     if (document.querySelector('.wave')) {
       for (var w = 0; w < waves.length; w++) {
@@ -647,6 +657,23 @@ $(window).load(function(){
     amp.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.11);
   }
 
+  // lazy load samples
+  function lazyLoadMain() {
+    var samps = document.querySelectorAll('.main-sample-holder .sample-player');
+    for (var s = 0; s < samps.length; s++) {
+      var og = samps[s].getAttribute('data-original');
+      samps[s].setAttribute('src',og);
+    }
+  }
+
+  function lazyLoadBank() {
+    var samps = document.querySelectorAll('.sample-bank .sample-player');
+    for (var s = 0; s < samps.length; s++) {
+      var og = samps[s].getAttribute('data-original');
+      samps[s].setAttribute('src',og);
+    }
+  }
+
   // Initiate Web Audio API and call functions //
   setTimeout(function () {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -699,6 +726,9 @@ $(window).load(function(){
 
     // init metronome the page has finished loading.
     initAudio();
+
+    // lazy load main samples
+    lazyLoadMain()
 
 
   }, 1000);

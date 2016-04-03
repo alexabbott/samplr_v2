@@ -215,6 +215,7 @@ angular.module('meanAppApp')
     angular.element(document.getElementById('btn-hide-bank')).removeClass('hide');
     angular.element(document.querySelector('.sample-bank-buttons')).removeClass('hide');
     angular.element(document.querySelector('.sample-bank')).addClass('show-bank');
+    lazyLoadBank();
   }
 
   $scope.hideBank = function() {
